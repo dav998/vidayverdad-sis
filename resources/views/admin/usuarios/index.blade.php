@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Administrar Usuarios</div>
 
@@ -14,6 +14,8 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Roles</th>
+                                <th scope="col">Acciones</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -22,6 +24,10 @@
                                     <th>{{$user->nombre}}</th>
                                     <th>{{$user->email}}</th>
                                     <th>{{ implode(', ', $user->roles()->get()->pluck('nombre')->toArray())}}</th>
+                                    <th>
+                                        <a href="{{route('admin.usuarios.edit', $user->id)}}">
+                                            <button type="button" class="btn-primary btn-sm"> Editar </button>
+                                    </th>
                                 </tr>
                                 @endforeach
                             </tbody>
