@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', function(){
+    return 'eres admin';
+})->middleware(['auth','auth.admin']);
+
+
+Route::namespace('Admin')->prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
+    Route::resource('/usuarios', 'UserController', ['except' => ['show']]);
+});

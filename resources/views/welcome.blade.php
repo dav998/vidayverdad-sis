@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
             html, body {
                 background-color: #fff;
@@ -72,7 +73,7 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <!--a href="{{ route('register') }}">Register</a-->
                     @endauth
                 </div>
             @endif
@@ -84,7 +85,11 @@
 
                 <div class="links">
                     <img src="images/vyv.jpg" alt="Unidad educativa Vida y Verdad">
+                    <br>
                 </div>
+                <br>
+                <br>
+                <a href="{{ route('login') }}" class="btn btn-info btn-lg" role="button" aria-pressed="true" style="font-weight:bold;">Entrar</a>
             </div>
         </div>
     </body>
