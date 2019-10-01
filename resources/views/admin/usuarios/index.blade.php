@@ -11,10 +11,10 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Roles</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col" >Name</th>
+                                <th scope="col" >E-mail</th>
+                                <th scope="col" >Roles</th>
+                                <th scope="col" class="text-center">Acciones</th>
 
                             </tr>
                             </thead>
@@ -27,6 +27,14 @@
                                     <th>
                                         <a href="{{route('admin.usuarios.edit', $user->id)}}">
                                             <button type="button" class="btn-primary btn-sm"> Editar </button>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <form action="{{ route('admin.usuarios.destroy', $user->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{method_field('DELETE')}}
+                                            <BUTTON type="submit" class="btn btn-danger btn-sm">Eliminar</BUTTON>
+                                        </form>
                                     </th>
                                 </tr>
                                 @endforeach
