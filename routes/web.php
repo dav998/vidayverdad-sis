@@ -18,11 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', function(){
-    return 'eres admin';
-})->middleware(['auth','auth.admin']);
+Route::get('/super', function(){
+    return 'eres super';
+})->middleware(['auth','auth.super']);
 
 
-Route::namespace('Admin')->prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
+Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->name('super.')->group(function (){
     Route::resource('/usuarios', 'UserController', ['except' => ['show']]);
 });

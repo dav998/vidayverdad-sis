@@ -36,16 +36,18 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @hasrole('admin')
                         &nbsp;<li class="nav-item">
-                            <a href="{{ route('admin.usuarios.index') }}">Administrar Usuarios </a>
+                            <a href="{{ route('super.usuarios.index') }}">Administrar Usuarios </a>
                         </li>
+                        @endhasrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">Entrar</a></li>
                             <!--li><a href="{{ route('register') }}">Register</a></li-->
                         @else
                             <li class="dropdown">
@@ -58,7 +60,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Cerrar Sesi&oacute;n
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

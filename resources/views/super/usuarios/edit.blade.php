@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Administrar {{$user->nombre}}</div>
                     <div class="panel-body">
-                    <form action="{{route('admin.usuarios.update', ['user' => $user ->id])}}" method="POST">
+                    <form action="{{route('super.usuarios.update', ['user' => $user ->id])}}" method="POST">
                         {{ csrf_field() }}
                         {{method_field('PUT')}}
                         @foreach($roles as $role)

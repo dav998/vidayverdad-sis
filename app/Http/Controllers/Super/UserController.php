@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Super;
 
 use App\Role;
 use App\User;
@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.usuarios.index')->with('users', User::all());
+        return view('super.usuarios.index')->with('users', User::paginate(10));
     }
 
     /**
@@ -62,9 +62,9 @@ class UserController extends Controller
     public function edit($id)
     {
         if(Auth::user()->id == $id){
-            return redirect()->route('admin.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
+            return redirect()->route('super.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
         }
-        return view('admin.usuarios.edit')->with(['user' => User::find($id), 'roles' => Role::all()]);
+        return view('super.usuarios.edit')->with(['user' => User::find($id), 'roles' => Role::all()]);
     }
 
     /**
@@ -77,16 +77,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         if(is_null($request->roles)){
-            return redirect()->route('admin.usuarios.index')->with('warning', 'Los usuarios no pueden estar sin un rol asignado.');
+            return redirect()->route('super.usuarios.index')->with('warning', 'Los usuarios no pueden estar sin un rol asignado.');
         }
         if(Auth::user()->id == $id){
-            return redirect()->route('admin.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
+            return redirect()->route('super.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
         }
 
         $user = User::find($id);
         $user->roles()->sync($request->roles);
 
-        return redirect()->route('admin.usuarios.index')->with('success', 'Rol de usuario actualizado.');
+        return redirect()->route('super.usuarios.index')->with('success', 'Rol de usuario actualizado.');
     }
 
     /**
@@ -97,10 +97,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->id == $id){
-            return redirect()->route('admin.usuarios.index')->with('warning', 'No puede eliminarse a usted mismo.');
+        $user = User::find($id);
+        if($user->id == 1){
+            return redirect()->route('super.usuarios.index')->with('danger', 'No puede eliminar al super usuario.');
+        }else{
+            if(Auth::user()->id == $id){
+                return redirect()->route('super.usuarios.index')->with('warning', 'No puede eliminarse a usted mismo.');
+            }
+
+            if($user){
+                $user->roles()->detach();
+                $user->delete();
+                return redirect()->route('super.usuarios.index')->with('success', 'El Usuario ha sido eliminado.');
+            }
+            return redirect()->route('super.usuarios.index')->with('Warning', 'Este Usuario no puede ser eliminado.');
         }
-        User::destroy($id);
-        return redirect()->route('admin.usuarios.index')->with('success', 'El Usuario ha sido eliminado.');
+
+
     }
 }

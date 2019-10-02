@@ -26,6 +26,6 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->afterCreating(User::class, function ($user, $faker){
-    $roles = Role::where('nombre','profesor')->get();
+    $roles = Role::where('nombre','personal')->get();
     $user->roles()->sync($roles->pluck('id')->toArray());
 });
