@@ -33,9 +33,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $admin = User::create([
-            'nombre'=>'super',
-            'email' => 'super@super.com',
-            'password' => bcrypt('super')
+            'nombre'=>'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin')
         ]);
 
         $direccion = User::create([

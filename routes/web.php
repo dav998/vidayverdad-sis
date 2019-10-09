@@ -26,3 +26,10 @@ Route::get('/super', function(){
 Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->name('super.')->group(function (){
     Route::resource('/usuarios', 'UserController', ['except' => ['show']]);
 });
+
+Route::resource('permisos','PermisoController');
+Route::post('/permisoguardar', 'PermisoController@store');
+
+Route::namespace('Dir')->prefix('dir')->name('dir.')->group(function (){
+    Route::resource('/permisos', 'PermisosAdmController');
+});

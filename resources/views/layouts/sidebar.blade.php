@@ -34,13 +34,86 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
             @endhasrole
             @hasrole('administrador')
-            <a href="#" class="list-group-item list-group-item-action bg-light">Solicitudes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Reportes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Link Administrador</a>
+            <ul class="list-group">
+                <li>
+            <a href="#homeSubmenusol" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Solicitudes</a>
+            <ul class="collapse" id="homeSubmenusol">
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                </li>
+            </ul>
+                </li>
+            </ul>
+
+            <ul class="list-group">
+                <li>
+                    <a href="#homeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
+                    <ul class="collapse" id="homeSubmenurep">
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Planes</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos Horarios</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos en Aula</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Recreos</a>
+                </li>
+                <li>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Uniformes</a>
+                </li>
+            </ul>
+                </li>
+            </ul>
             @endhasrole
             @hasrole('direccion')
-            <a href="#" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Reportes Supervisores</a>
+            <ul class="list-group">
+                <li>
+                    <a href="#homeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
+                    <ul class="collapse" id="homeSubmenurep">
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                        </li>
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos en Aula</a>
+                        </li>
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Recreos</a>
+                        </li>
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Uniformes</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="list-group">
+                <li>
+                    <a href="#homeSubmenusol"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
+                    <ul class="collapse" id="homeSubmenusol">
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('dir.permisos.index') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             @endhasrole
             @hasrole('secretaria_dir')
             <a href="#" class="list-group-item list-group-item-action bg-light">Reportes administrativos</a>
@@ -56,9 +129,20 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Recreos</a>
             @endhasrole
-            <a href="#" class="list-group-item list-group-item-action bg-light">Mis Solicitudes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Permisos</a>
+            <ul class="list-group">
+                <li>
+                <a href="#homeSubmenudef" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Mis Solicitudes</a>
+                <ul class="collapse" id="homeSubmenudef">
+                    <li>
+                        <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -67,7 +151,7 @@
 
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+            <button class="btn btn-primary" id="menu-toggle">Tabular Menu</button>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
