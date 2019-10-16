@@ -18,6 +18,7 @@ class RolesTableSeeder extends Seeder
         Role::create(['nombre'=>'secretaria_dir']);
         Role::create(['nombre'=>'sistemas']);
         Role::create(['nombre'=>'supervisor']);
+        Role::create(['nombre'=>'profesor']);
         Role::create(['nombre'=>'personal']);
         Role::create(['nombre'=>'recepcion']);
     }

@@ -83,8 +83,8 @@
             @hasrole('direccion')
             <ul class="list-group">
                 <li>
-                    <a href="#homeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
-                    <ul class="collapse" id="homeSubmenurep">
+                    <a href="#dirhomeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
+                    <ul class="collapse" id="dirhomeSubmenurep">
                         <li>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                         </li>
@@ -103,13 +103,24 @@
 
             <ul class="list-group">
                 <li>
-                    <a href="#homeSubmenusol"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
-                    <ul class="collapse" id="homeSubmenusol">
+                    <a href="#dirhomeSubmenusol"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
+                    <ul class="collapse" id="dirhomeSubmenusol">
                         <li>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                         </li>
                         <li>
-                            <a href="{{ route('dir.permisos.index') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                            <a href="#dirpermiso"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                            <ul class="collapse" id="dirpermiso">
+                                <li>
+                                    <a href="{{ route('dir.permisos.index') }}" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('Dir/permisos/aproved') }}" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('Dir/permisos/rejected') }}" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -122,7 +133,7 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Reporte de Notas Digital</a>
             @endhasrole
             @hasrole('recepcion')
-            <a href="#" class="list-group-item list-group-item-action bg-light">Formulario de Atrasos/Salidas Anticipadas</a>
+            <a href="{{url('/tolerancias')}}" class="list-group-item list-group-item-action bg-light">Formulario de Atrasos/Salidas Anticipadas</a>
             @endhasrole
             @hasrole('supervisor')
             <a href="#" class="list-group-item list-group-item-action bg-light">Uniformes</a>

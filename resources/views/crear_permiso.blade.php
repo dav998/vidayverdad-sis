@@ -16,7 +16,7 @@
 
     <div class="form-group">
         <label for="">Motivo de Ausencia</label>
-        <textarea value="{{old('motivo')}}" type="date" class="form-control" name="motivo" id="motivo" placeholder="Raz&oacute;n de Ausencia"></textarea>
+        <textarea value="{{old('motivo')}}" type="text" class="form-control" name="motivo" id="motivo" placeholder="Raz&oacute;n de Ausencia"></textarea>
 
         <input type="hidden" class="hidden" name="id" id="id" value="{{$user->id}}">
     </div>

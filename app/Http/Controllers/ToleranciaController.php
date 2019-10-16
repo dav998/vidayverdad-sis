@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Permiso;
 
-class PermisoController extends Controller
+class ToleranciaController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,29 +27,28 @@ class PermisoController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $permisos = Permiso::where('user_id', $user->id)->orderBy('created_at', 'DES')->paginate(10);
-        return view('/permisos', compact('permisos', 'user'));
+        return view('/crear_tolerancia');
     }
     public function show($id)
     {
-        $data=Permiso::find($id);
-        return view('permisosver',compact('data'));
+
     }
     public function create(){
-        $user = Auth::user();
-        return view('crear_permiso', compact('user'));
+
     }
 
     public function store()
     {
         //dd($request->all());
-
+        $id = request('ci');
+        $user = User::where('ci','=',$id)->get()->first();
+        
         $permiso = new Permiso();
 
         $permiso ->fecha_ausencia = request('fecha_ausente');
         $permiso ->motivo = request('motivo');
         $permiso ->cargo = request('cargo');
-        $permiso ->user_id = request('id');
+        $permiso ->user_id = $user->id;
         $permiso->suplente = request('suplente');
         $permiso->aprobado = 0;
         $permiso ->save();
@@ -58,6 +58,6 @@ class PermisoController extends Controller
         $multimedia->uri = $image->getClientOriginalName();
         $multimedia->id_propiedad = $propiedad->id_propiedad;
         $multimedia->save();*/
-       return redirect()->route('permisos.index')->with('success', 'Solicitud Enviada.');
+       return redirect()->route('tolerancias.index')->with('success', 'Solicitud Enviada.');
     }
 }

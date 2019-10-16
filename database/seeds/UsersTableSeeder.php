@@ -24,28 +24,33 @@ class UsersTableSeeder extends Seeder
         $sistemasRole = Role::where('nombre', 'sistemas')->first();
         $supervisorRole = Role::where('nombre', 'supervisor')->first();
         $personalRole = Role::where('nombre', 'personal')->first();
+        $profesorRole = Role::where('nombre', 'profesor')->first();
         $recepcionRole = Role::where('nombre', 'recepcion')->first();
 
         $super = User::create([
             'nombre'=>'SuperSU',
+            'ci' => '0',
             'email' => 'super@super.com',
             'password' => bcrypt('super')
         ]);
 
         $admin = User::create([
             'nombre'=>'admin',
+            'ci' => '1111111',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin')
         ]);
 
         $direccion = User::create([
             'nombre'=>'Dir',
+            'ci' => '2222222',
             'email' => 'dir@dir.com',
             'password' => bcrypt('dir')
         ]);
 
         $secretaria_dir = User::create([
             'nombre'=>'Secre',
+            'ci' => '3333333',
             'email' => 'secre@secre.com',
             'password' => bcrypt('secre')
         ]);
@@ -53,23 +58,34 @@ class UsersTableSeeder extends Seeder
         $sistemas = User::create([
             'nombre'=>'Sistemas',
             'email' => 'sis@sis.com',
+            'ci' => '4444444',
             'password' => bcrypt('sis')
         ]);
 
         $supervisor = User::create([
             'nombre'=>'Supervisor',
+            'ci' => '5555555',
             'email' => 'supervisor@supervisor.com',
             'password' => bcrypt('supervisor')
         ]);
 
         $personal = User::create([
             'nombre'=>'personal',
-            'email' => 'personal@profe.com',
+            'ci' => '6666666',
+            'email' => 'personal@personal.com',
             'password' => bcrypt('personal')
+        ]);
+
+        $profesor = User::create([
+            'nombre'=>'personal',
+            'ci' => '88888888',
+            'email' => 'profe@profe.com',
+            'password' => bcrypt('profesor')
         ]);
 
         $recepcion = User::create([
             'nombre'=>'Recepcion',
+            'ci' => '7777777',
             'email' => 'recep@recep.com',
             'password' => bcrypt('recep')
         ]);
@@ -81,6 +97,7 @@ class UsersTableSeeder extends Seeder
         $sistemas->roles()->attach($sistemasRole);
         $supervisor->roles()->attach($supervisorRole);
         $personal->roles()->attach($personalRole);
+        $profesor->roles()->attach($profesorRole);
         $recepcion->roles()->attach($recepcionRole);
 
         factory(User::class, 10)->create();

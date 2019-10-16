@@ -23,17 +23,40 @@ class PermisosAdmController extends Controller
        /* $permisos = Permiso::where('user_id', $user->id)->orderBy('created_at', 'ASC')->paginate(10);
         return view('/permisos', compact('permisos', 'user'));
         $permiso [] = DB::table('permisos')->pluck('user_id');
-        //$users= DB::table('users')->get();
         $user= User::where('id', $permiso);
         return view('dir.permisos.index', compact('user'))->with('permisos', Permiso::paginate(10));
         //return $permiso;*/
         $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre')
+            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->where('aprobado', 0)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
         return view('dir.permisos.index', compact('datas'));
     }
 
+    public function aproved()
+    {
+        $datas = DB::table('permisos as P')
+            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->where('aprobado', 1)
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->get();
+        return view('dir.permisos.aproved', compact('datas'));
+        //return 'tonto';
+
+    }
+
+    public function rejected()
+    {
+        $datas = DB::table('permisos as P')
+            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->where('aprobado', 2)
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->get();
+        return view('dir.permisos.rejected', compact('datas'));
+        //return 'tonto';
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -63,7 +86,10 @@ class PermisosAdmController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Permiso::find($id);
+        $user = User::where('id','=',$data->user_id)->get()->first();
+
+        return view('dir.permisos.show', compact('data', 'user'));
     }
 
     /**
@@ -74,10 +100,17 @@ class PermisosAdmController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::user()->id == $id){
-            return redirect()->route('super.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
-        }
-        return view('super.usuarios.edit')->with(['user' => User::find($id), 'roles' => Role::all()]);
+
+       /* $data = DB::table('permisos as P')
+            ->select('P.id')
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->get();*/
+        //$data = Permiso::select('fecha_ausencia', 'motivo', 'created_at', 'cargo', 'suplente', 'id')->where('user_id', $id)->get();
+        //$user = User::select('nombre')->where('id', $id)->get();
+        $data = Permiso::find($id);
+        $user = User::where('id','=',$data->user_id)->get()->first();
+
+        return view('dir.permisos.edit', compact('data', 'user'));
     }
 
     /**
@@ -89,17 +122,13 @@ class PermisosAdmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(is_null($request->roles)){
-            return redirect()->route('super.usuarios.index')->with('warning', 'Los usuarios no pueden estar sin un rol asignado.');
-        }
-        if(Auth::user()->id == $id){
-            return redirect()->route('super.usuarios.index')->with('warning', 'No puede editarse a usted mismo.');
-        }
 
-        $user = User::find($id);
-        $user->roles()->sync($request->roles);
 
-        return redirect()->route('super.usuarios.index')->with('success', 'Rol de usuario actualizado.');
+        DB::table('permisos')
+            ->where('id', $id)
+            ->update(['aprobado' => request('aproved'),
+                'observaciones' => request('observacion') ]);
+        return redirect()->route('dir.permisos.index')->with('success', 'Solicitud Registrada.');
     }
 
     /**

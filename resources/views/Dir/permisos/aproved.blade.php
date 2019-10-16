@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
+                    <div class="panel-heading">Administrar Permisos</div>
 
                     <div class="panel-body">
                         <table class="table">
@@ -22,10 +22,9 @@
                             </thead>
                             <tbody>
                             @if($datas->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay solicitudes pendientes</th></tr>
+                                <tr><th colspan="5" class="text-center">No hay solicitudes aprobadas</th></tr>
                             @else
                             @foreach($datas as $data)
-
                                 <tr>
                                     <th  class="text-center">{{$data->nombre}}</th>
                                     <th class="text-center">{{$data->fecha_ausencia}}</th>
@@ -40,8 +39,8 @@
                                         @endif
                                     @endif
                                     <th class="text-center">
-                                        <a href="{{route('dir.permisos.edit', $data->pid)}}">
-                                            <button type="button" class="btn-primary btn-sm"> Administrar </button>
+                                        <a href="{{route('dir.permisos.show', $data->pid)}}">
+                                            <button type="button" class="btn-primary btn-sm"> Ver </button>
                                         </a>
                                     </th>
                                 </tr>

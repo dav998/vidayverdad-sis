@@ -31,28 +31,32 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if($permisos->isEmpty())
+                                <tr><th colspan="5" class="text-center">No hay registro de solicitudes</th></tr>
+                            @else
                             @foreach($permisos as $permiso)
                                 <tr>
                                     <th>{{$permiso->cargo}}</th>
                                     <th>{{$permiso->suplente}}</th>
                                     <th>{{$permiso->created_at->format('d-m-Y')}}</th>
                                     @if($permiso->aprobado == 0)
-                                        <th bgcolor="#99ccff" >En espera</th>
+                                        <th style="border-radius: 5px; " class="text-center" bgcolor="#575644"><font color="white">En espera</font></th>
                                         @else
                                         @if($permiso->aprobado == 1)
-                                            <th bgcolor="#00FF00" >Aprobado</th>
+                                            <th style="border-radius: 5px;" class="text-center" bgcolor="#B4BD46" ><font color="white">Aprobado</font></th>
                                         @else
-                                            <th bgcolor="#FF0000">Rechazada</th>
+                                            < <th style="border-radius: 5px;" class="text-center" bgcolor="#B90D09"><font color="white">Rechazada</font></th>
                                             @endif
                                     @endif
 
                                     <th>
-                                        <a href="#">
+                                        <a href="{{action('PermisoController@show', $permiso->id)}}">
                                             <button type="button" class="btn-primary btn-sm"> Ver </button>
                                         </a>
                                     </th>
                                 </tr>
                             @endforeach
+                                @endif
                             </tbody>
                         </table>
                         {!! $permisos->render() !!}
