@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nombre');
             $table->integer('ci');
             $table->string('cargo')->nullable();
+            $table->date('ano_ingreso')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

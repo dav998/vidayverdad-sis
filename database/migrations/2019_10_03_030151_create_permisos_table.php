@@ -21,6 +21,7 @@ class CreatePermisosTable extends Migration
             $table->string('motivo');
             $table->string('cargo');
             $table->string('suplente');
+            $table->string('url')->nullable();
             $table->string('observaciones')->nullable();
             $table->integer('aprobado')->nullable();
             $table->timestamps();

@@ -11,19 +11,18 @@
     <legend>Solicitar Permiso</legend>
     <div class="form-group">
         <label for="">Fecha de Ausencia</label>
-        <input required value="{{old('fecha_ausencia')}}" type="date" class="form-control" name="fecha_ausente" id="fecha_ausente">
+        <input required value="{{old('fecha_ausencia')}}" type="date" min="{{date('Y-m-d')}}" class="form-control" name="fecha_ausente" id="fecha_ausente">
     </div>
 
     <div class="form-group">
         <label for="">Motivo de Ausencia</label>
-        <textarea value="{{old('motivo')}}" type="text" class="form-control" name="motivo" id="motivo" placeholder="Raz&oacute;n de Ausencia"></textarea>
+        <textarea  required value="{{old('motivo')}}" type="text" class="form-control" name="motivo" id="motivo" placeholder="Raz&oacute;n de Ausencia"></textarea>
 
         <input type="hidden" class="hidden" name="id" id="id" value="{{$user->id}}">
     </div>
     <div class="form-group">
         <label for="">Cargo</label>
         <input readonly value="{{$user->cargo}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del solicitante">
-        <input type="hidden" class="hidden" name="tipo" id="tipo" value="0">
     </div>
     <div class="form-group">
         <label for="">Suplente</label>

@@ -49,9 +49,14 @@ class PermisoController extends Controller
         $permiso ->motivo = request('motivo');
         $permiso ->cargo = request('cargo');
         $permiso ->user_id = request('id');
-        $permiso->tipo = request('tipo');
+        $permiso->tipo = 0;
         $permiso->suplente = request('suplente');
         $permiso->aprobado = 0;
+        $image = request('imagen');
+        if($image != null){
+            $image->move('uploads', $image->getClientOriginalName());
+            $permiso->url = $image->getClientOriginalName();
+        }
         $permiso ->save();
 
         /*$image = $request->file('imagen');
