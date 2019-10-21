@@ -27,7 +27,21 @@ class ToleranciaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('/crear_tolerancia');
+        return view('/pre_tolerancia');
+    }
+    public function buscar(){
+
+        $ci = request('ci');
+        $user = User::where('ci','=',$ci)->get()->first();
+        $userv = User::where('ci','=',$ci)->get()->toArray();
+       if(count($userv) === 0){
+           return redirect()->action('ToleranciaController@index')->with('success', 'Verifique el C.I. Usuario no encontrado');
+           // return view('/pre_tolerancia')->with('success', 'Verifique el C.I. Usuario no encontrado');
+        }else{
+            return view('/crear_tolerancia', compact('user'));
+        }
+
+
     }
     public function show($id)
     {
@@ -49,6 +63,7 @@ class ToleranciaController extends Controller
         $permiso ->motivo = request('motivo');
         $permiso ->cargo = request('cargo');
         $permiso ->user_id = $user->id;
+        $permiso ->tipo = request('tipo');
         $permiso->suplente = request('suplente');
         $permiso->aprobado = 0;
         $permiso ->save();

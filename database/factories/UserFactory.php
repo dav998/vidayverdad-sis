@@ -21,12 +21,13 @@ $factory->define(User::class, function (Faker $faker) {
         'nombre' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'ci' => $faker->unique()->randomNumber($nbDigits = 7),
+        'cargo'=>$faker->randomElement(['Profesor Biologia', 'Profesor Matematica', 'Profesor Literatura']),
         'password' => bcrypt('personal'), // secret
         'remember_token' => str_random(10),
     ];
 });
 
 $factory->afterCreating(User::class, function ($user, $faker){
-    $roles = Role::where('nombre','personal')->get();
+    $roles = Role::where('nombre','profesor')->get();
     $user->roles()->sync($roles->pluck('id')->toArray());
 });

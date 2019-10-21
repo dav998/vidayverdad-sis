@@ -15,6 +15,7 @@ class CreatePermisosTable extends Migration
     {
         Schema::create('permisos', function (Blueprint $table) {
             $table->increments('id');
+            $table-> integer('tipo');
             $table->integer('user_id')->unsigned();
             $table->date('fecha_ausencia');
             $table->string('motivo');

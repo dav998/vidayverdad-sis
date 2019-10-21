@@ -13,6 +13,7 @@
                             <tr>
                                 <th class="text-center" scope="col" >Nombre</th>
                                 <th class="text-center" scope="col" >D&iacute;a de Ausencia</th>
+                                <th class="text-center" scope="col" >Tipo de Solicitud</th>
                                 <th class="text-center" scope="col" >Cargo</th>
                                 <th class="text-center" scope="col" >Estado</th>
                                 <th class="text-center" scope="col" class="text-center">Acciones</th>
@@ -28,6 +29,15 @@
                                 <tr>
                                     <th  class="text-center">{{$data->nombre}}</th>
                                     <th class="text-center">{{$data->fecha_ausencia}}</th>
+                                    @if($data->tipo == 1)
+                                        <th style="border-radius: 5px; " >TOLERANCIA</th>
+                                    @else
+                                        @if($data->tipo == 2)
+                                            <th style="border-radius: 5px;" >SALIDA ANTICIPADA</th>
+                                        @else
+                                            <th style="border-radius: 5px;" >PERMISO</th>
+                                        @endif
+                                    @endif
                                     <th class="text-center">{{$data->cargo }}</th>
                                     @if($data->aprobado == 0)
                                         <th style="border-radius: 5px; " class="text-center" bgcolor="#575644"><font color="white">En espera</font></th>

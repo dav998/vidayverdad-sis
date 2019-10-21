@@ -31,12 +31,14 @@ class UsersTableSeeder extends Seeder
             'nombre'=>'SuperSU',
             'ci' => '0',
             'email' => 'super@super.com',
+            'cargo' => 'Super Usuario',
             'password' => bcrypt('super')
         ]);
 
         $admin = User::create([
             'nombre'=>'admin',
             'ci' => '1111111',
+            'cargo' => 'Administracion',
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin')
         ]);
@@ -44,6 +46,7 @@ class UsersTableSeeder extends Seeder
         $direccion = User::create([
             'nombre'=>'Dir',
             'ci' => '2222222',
+            'cargo' => 'Direccion',
             'email' => 'dir@dir.com',
             'password' => bcrypt('dir')
         ]);
@@ -51,6 +54,7 @@ class UsersTableSeeder extends Seeder
         $secretaria_dir = User::create([
             'nombre'=>'Secre',
             'ci' => '3333333',
+            'cargo'=>'Secretaria',
             'email' => 'secre@secre.com',
             'password' => bcrypt('secre')
         ]);
@@ -59,12 +63,14 @@ class UsersTableSeeder extends Seeder
             'nombre'=>'Sistemas',
             'email' => 'sis@sis.com',
             'ci' => '4444444',
+            'cargo'=>'Sistemas',
             'password' => bcrypt('sis')
         ]);
 
         $supervisor = User::create([
             'nombre'=>'Supervisor',
             'ci' => '5555555',
+            'cargo'=>'Supervisor',
             'email' => 'supervisor@supervisor.com',
             'password' => bcrypt('supervisor')
         ]);
@@ -72,20 +78,23 @@ class UsersTableSeeder extends Seeder
         $personal = User::create([
             'nombre'=>'personal',
             'ci' => '6666666',
+            'cargo'=>'Limpieza',
             'email' => 'personal@personal.com',
             'password' => bcrypt('personal')
         ]);
 
         $profesor = User::create([
-            'nombre'=>'personal',
+            'nombre'=>'profesor',
             'ci' => '88888888',
+            'cargo' => 'Profesor Matematicas',
             'email' => 'profe@profe.com',
             'password' => bcrypt('profesor')
         ]);
 
         $recepcion = User::create([
-            'nombre'=>'Recepcion',
+            'nombre'=>'Aleida',
             'ci' => '7777777',
+            'cargo'=>'Recepcion',
             'email' => 'recep@recep.com',
             'password' => bcrypt('recep')
         ]);

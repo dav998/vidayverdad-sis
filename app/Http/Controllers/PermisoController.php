@@ -49,6 +49,7 @@ class PermisoController extends Controller
         $permiso ->motivo = request('motivo');
         $permiso ->cargo = request('cargo');
         $permiso ->user_id = request('id');
+        $permiso->tipo = request('tipo');
         $permiso->suplente = request('suplente');
         $permiso->aprobado = 0;
         $permiso ->save();
@@ -59,5 +60,12 @@ class PermisoController extends Controller
         $multimedia->id_propiedad = $propiedad->id_propiedad;
         $multimedia->save();*/
        return redirect()->route('permisos.index')->with('success', 'Solicitud Enviada.');
+    }
+
+    public function destroy($id)
+    {
+        $permiso = Permiso::find($id);
+                $permiso->delete();
+                return redirect()->route('permisos.index')->with('danger', 'La Solicitud ha sido eliminada.');
     }
 }

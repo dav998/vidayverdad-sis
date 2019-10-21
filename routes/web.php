@@ -37,5 +37,6 @@ Route::get('Dir/permisos/aproved', 'Dir\PermisosAdmController@aproved')->middlew
 Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middleware(['auth', 'auth.dir']);
 
 //Route::get('/crear_tolerancia','ToleranciaController@index')->name('tolerancias');
+Route::post('/crear_tolerancia', 'ToleranciaController@buscar');
 Route::resource('tolerancias','ToleranciaController');
 Route::post('/toleranciaoguardar', 'ToleranciaController@store');

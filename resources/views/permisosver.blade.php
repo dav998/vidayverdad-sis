@@ -5,9 +5,21 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Administrar Permisos</div>
+                    <div class="panel-heading">Administrar Solicitudes de Permisos/Tolerancias</div>
                     <div class="panel-body">
-                            <legend>Ver Permiso</legend>
+                            <legend>Ver Solicitud de Permiso/Tolerancia</legend>
+                        <div class="form-group">
+                            <label for="">Tipo de Solicitud</label>
+                            @if($data->tipo == 1)
+                                <input readonly  value="TOLERANCIA" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                            @else
+                                @if($data->tipo == 2)
+                                    <input readonly  value="SALIDA ANTICIPADA" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                                @else
+                                    <input readonly  value="PERMISO" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                                @endif
+                            @endif
+                        </div>
                             <div class="form-group">
                                 <label for="">Solicitud Enviada en Fecha:</label>
                                 <input readonly  value="{{$data->created_at}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">

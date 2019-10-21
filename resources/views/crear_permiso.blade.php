@@ -22,7 +22,8 @@
     </div>
     <div class="form-group">
         <label for="">Cargo</label>
-        <input required value="{{old('cargo')}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del solicitante">
+        <input readonly value="{{$user->cargo}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del solicitante">
+        <input type="hidden" class="hidden" name="tipo" id="tipo" value="0">
     </div>
     <div class="form-group">
         <label for="">Suplente</label>

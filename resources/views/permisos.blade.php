@@ -16,17 +16,15 @@
                             <br>
 
                         </div>
-
-
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col" >Cargo</th>
-                                <th scope="col" >Suplente</th>
-                                <th scope="col" >Fecha de Env&iacute;o de Solicitud</th>
-                                <th scope="col" >Estado</th>
-                                <th scope="col"  >Acciones</th>
-                                <th></th>
+                                <th scope="col"  class="text-center">Tipo de Solicitud</th>
+                                <th scope="col"  class="text-center">Suplente</th>
+                                <th scope="col"  class="text-center">Fecha de Env&iacute;o de Solicitud</th>
+                                <th scope="col"  class="text-center">Estado</th>
+                                <th scope="col" colspan="2" class="text-center">Acciones</th>
+
 
                             </tr>
                             </thead>
@@ -36,16 +34,31 @@
                             @else
                             @foreach($permisos as $permiso)
                                 <tr>
-                                    <th>{{$permiso->cargo}}</th>
+                                    @if($permiso->tipo == 1)
+                                        <th style="border-radius: 5px; " >TOLERANCIA</th>
+                                    @else
+                                        @if($permiso->tipo == 2)
+                                            <th style="border-radius: 5px;" >SALIDA ANTICIPADA</th>
+                                        @else
+                                            <th style="border-radius: 5px;" >PERMISO</th>
+                                        @endif
+                                    @endif
                                     <th>{{$permiso->suplente}}</th>
                                     <th>{{$permiso->created_at->format('d-m-Y')}}</th>
                                     @if($permiso->aprobado == 0)
                                         <th style="border-radius: 5px; " class="text-center" bgcolor="#575644"><font color="white">En espera</font></th>
+                                        <th>
+                                            <form action="{{ route('permisos.destroy', $permiso->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{method_field('DELETE')}}
+                                                <BUTTON type="submit" class="btn btn-danger btn-sm">Eliminar</BUTTON>
+                                            </form>
+                                        </th>
                                         @else
                                         @if($permiso->aprobado == 1)
                                             <th style="border-radius: 5px;" class="text-center" bgcolor="#B4BD46" ><font color="white">Aprobado</font></th>
                                         @else
-                                            < <th style="border-radius: 5px;" class="text-center" bgcolor="#B90D09"><font color="white">Rechazada</font></th>
+                                             <th style="border-radius: 5px;" class="text-center" bgcolor="#B90D09"><font color="white">Rechazada</font></th>
                                             @endif
                                     @endif
 

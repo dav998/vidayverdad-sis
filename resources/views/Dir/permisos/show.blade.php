@@ -17,6 +17,18 @@
                             <input readonly  value="{{$data->created_at}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
                         </div>
                         <div class="form-group">
+                            <label for="">Tipo de Solicitud</label>
+                            @if($data->tipo == 1)
+                                <input readonly  value="TOLERANCIA" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                            @else
+                                @if($data->tipo == 2)
+                                    <input readonly  value="SALIDA ANTICIPADA" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                                @else
+                                    <input readonly  value="PERMISO" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                                @endif
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <label for="">Fecha de Ausencia</label>
                             <input readonly  value="{{$data->fecha_ausencia}}" type="date" class="form-control" name="fecha_ausente" id="fecha_ausente">
                         </div>

@@ -27,7 +27,7 @@ class PermisosAdmController extends Controller
         return view('dir.permisos.index', compact('user'))->with('permisos', Permiso::paginate(10));
         //return $permiso;*/
         $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 0)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
@@ -37,7 +37,7 @@ class PermisosAdmController extends Controller
     public function aproved()
     {
         $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 1)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
@@ -49,7 +49,7 @@ class PermisosAdmController extends Controller
     public function rejected()
     {
         $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+            ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 2)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
