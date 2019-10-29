@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permiso extends Model
+class SolVacas extends Model
 {
     protected $fillable = [
-        'fecha_ausencia', 'user_id', 'motivo', 'cargo', 'suplente', 'observaciones', 'aprobado', 'url', 'tipo'
+
+        'tipo', 'user_id', 'fecha_inicio','fecha_fin', 'dias', 'observaciones', 'aprobado'
     ];
 
-    protected $table = "permisos";
+    protected $table = "solicitud_vacas";
     //protected $dates = ['deleted_at'];
     protected $primaryKey = "id";
 

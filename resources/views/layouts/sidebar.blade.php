@@ -28,7 +28,7 @@
         <div class="list-group list-group-flush">
             @hasrole('super')
             <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Administrar Usuarios</a>
-            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuarios</a>
+            <a href="{{ route('super.usuarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuarios</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Registrar Horarios</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>

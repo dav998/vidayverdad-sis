@@ -23,6 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'ci' => $faker->unique()->randomNumber($nbDigits = 7),
         'cargo'=>$faker->randomElement(['Profesor Biologia', 'Profesor Matematica', 'Profesor Literatura']),
         'password' => bcrypt('personal'), // secret
+        'ano_ingreso' => $faker->date(),
         'remember_token' => str_random(10),
     ];
 });
@@ -30,4 +31,5 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->afterCreating(User::class, function ($user, $faker){
     $roles = Role::where('nombre','profesor')->get();
     $user->roles()->sync($roles->pluck('id')->toArray());
+
 });

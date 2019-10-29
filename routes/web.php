@@ -24,7 +24,7 @@ Route::get('/super', function(){
 
 
 Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->name('super.')->group(function (){
-    Route::resource('/usuarios', 'UserController', ['except' => ['show']]);
+    Route::resource('/usuarios', 'UserController');
 });
 
 Route::resource('permisos','PermisoController');

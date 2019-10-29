@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Super;
 
 use App\Role;
 use App\User;
+use App\VacasUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -28,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('super.usuarios.create');
     }
 
     /**
@@ -39,7 +41,62 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+
+        $user ->nombre = request('nombre');
+        $user ->ci = request('ci');
+        $user ->cargo = request('cargo');
+        $user ->ano_ingreso = request('ano_ingreso');
+        $user->email = request('email');
+        $password = request('password');
+        $password2 = request('passwords');
+
+        if( $password != $password2){
+            return redirect()->route('super.usuarios.create')->withInput()->with('warning', 'Las contraseñas no coinciden');
+        }else{
+            $user->password = bcrypt(request('password'));
+        }
+        $user ->save();
+        $dias_disp = request('dias_disp');
+        $newuser = User::where('ci', '=', request('ci'))->get()->first();
+        $vacas = new VacasUser();
+        $anoinsep = explode("-", $newuser->ano_ingreso);
+        $mytime = date('Y-m-d');
+        $anoactsep = explode("-", $mytime);
+        $anoactual = $anoactsep[0];
+        $anoingreso = $anoinsep[0];
+        $anostrabajados = $anoactual - $anoingreso;
+
+        if($anostrabajados > 0 and $anostrabajados <= 5){
+            $dias_disp = $dias_disp + 15;
+            $dias_totales=15;
+        }else{
+            if($anostrabajados > 5 and $anostrabajados <= 10){
+                $dias_disp = $dias_disp + 20;
+                $dias_totales=20;
+            }else
+            {
+                if($anostrabajados > 10){
+
+                    $dias_disp = $dias_disp + 30;
+                    $dias_totales=30;
+
+                }else{
+                    $dias_disp = 0;
+                    $dias_totales=0;
+                }
+            }
+
+
+        }
+        $vacas->user_id = $newuser->id;
+        $vacas->anos_trabajados = $anostrabajados;
+        $vacas->dias_totales = $dias_totales;
+        $vacas->dias_disp = $dias_disp;
+        $vacas->save();
+
+        return $dias_disp;
+
     }
 
     /**
