@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Super;
 
 use App\Role;
+use App\RoleUser;
 use App\User;
 use App\VacasUser;
 use Illuminate\Http\Request;
@@ -95,7 +96,12 @@ class UserController extends Controller
         $vacas->dias_disp = $dias_disp;
         $vacas->save();
 
-        return $dias_disp;
+        $role = new RoleUser();
+        $role->user_id = $newuser->id;
+        $role->role_id = request('rol');
+        $role->save();
+
+        return 'funciona';
 
     }
 

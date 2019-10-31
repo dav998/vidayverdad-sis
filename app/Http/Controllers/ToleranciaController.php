@@ -35,7 +35,7 @@ class ToleranciaController extends Controller
         $user = User::where('ci','=',$ci)->get()->first();
         $userv = User::where('ci','=',$ci)->get()->toArray();
        if(count($userv) === 0){
-           return redirect()->action('ToleranciaController@index')->with('success', 'Verifique el C.I. Usuario no encontrado');
+           return redirect()->action('ToleranciaController@index')->with('warning', 'Verifique el C.I. Usuario no encontrado');
            // return view('/pre_tolerancia')->with('success', 'Verifique el C.I. Usuario no encontrado');
         }else{
             return view('/crear_tolerancia', compact('user'));

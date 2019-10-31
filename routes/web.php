@@ -28,6 +28,8 @@ Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->n
 });
 
 Route::resource('permisos','PermisoController');
+Route::resource('solvacas','VacasSolController');
+Route::post('/crear_vacas', 'VacasSolController@dias');
 Route::post('/permisoguardar', 'PermisoController@store');
 
 Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('dir.')->group(function (){

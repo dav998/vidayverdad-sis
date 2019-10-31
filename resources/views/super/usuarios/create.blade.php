@@ -23,6 +23,14 @@
             <input required value="{{old('cargo')}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del empleado">
         </div>
         <div class="form-group">
+            <label for="">Rol</label><br>
+            <select class="custom-select" id="rol" name="rol" >
+                <option value="6" >Supervisor</option>
+                <option value="7" >Profesor</option>
+                <option value="8" >Personal</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="">A&ntilde;o de Ingreso</label>
             <input required value="{{old('ano_ingreso')}}"  type="date" class="form-control" name="ano_ingreso" id="ano_ingreso">
         </div>

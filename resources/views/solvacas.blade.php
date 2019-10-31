@@ -5,23 +5,24 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Permisos</div>
+                    <div class="panel-heading">Solicitud de Vacaciones</div>
 
                     <div class="panel-body">
 
                         <div class="center-block">
                             <div class="center-block">
-                                <a href="{{action('PermisoController@create')}}" class="btn btn-success btn-block">Solicitar Permiso</a>
+                                <a href="{{action('VacasSolController@create')}}" class="btn btn-success btn-block">Solicitar Vacaciones</a>
                             </div>
                             <br>
 
                         </div>
-                        <table class="table">
-                            <thead class="thead-dark">
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
                                 <th scope="col"  >Tipo de Solicitud</th>
-                                <th scope="col"  >Suplente</th>
-                                <th scope="col"  >Fecha de Env&iacute;o de Solicitud</th>
+                                <th scope="col"  >Fecha Inicio</th>
+                                <th scope="col"  >Fecha Fin</th>
+                                <th scope="col"  >Dias</th>
                                 <th scope="col"  class="text-center">Estado</th>
                                 <th scope="col" colspan="2" class="text-center">Acciones</th>
 
@@ -29,33 +30,34 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if($permisos->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay registro de solicitudes</th></tr>
+                            @if($solvacas->isEmpty())
+                                <tr><th colspan="6" class="text-center">No hay registro de solicitudes</th></tr>
                             @else
-                            @foreach($permisos as $permiso)
+                            @foreach($solvacas as $vacas)
                                 <tr>
-                                    @if($permiso->tipo == 1)
-                                        <th style="border-radius: 5px; " >TOLERANCIA</th>
+                                    @if($vacas->tipo == 1)
+                                        <th style="border-radius: 5px; " >INVIERNO</th>
                                     @else
-                                        @if($permiso->tipo == 2)
-                                            <th style="border-radius: 5px;" >SALIDA ANTICIPADA</th>
+                                        @if($vacas->tipo == 2)
+                                            <th style="border-radius: 5px;" >FIN DE A&Ntilde;O</th>
                                         @else
-                                            <th style="border-radius: 5px;" >PERMISO</th>
+                                            <th style="border-radius: 5px;" >A CUENTA</th>
                                         @endif
                                     @endif
-                                    <th>{{$permiso->suplente}}</th>
-                                    <th>{{$permiso->created_at->format('d-m-Y')}}</th>
-                                    @if($permiso->aprobado == 0)
+                                    <th>{{date('d-m-Y', strtotime($vacas->fecha_inicio))}}</th>
+                                    <th>{{date('d-m-Y', strtotime($vacas->fecha_fin))}}</th>
+                                        <th>{{$vacas->dias}}</th>
+                                    @if($vacas->aprobado == 0)
                                         <th style="border-radius: 5px; " class="text-center" bgcolor="#575644"><font color="white">En espera</font></th>
                                         <th>
-                                            <form action="{{ route('permisos.destroy', $permiso->id) }}" method="POST">
+                                            <form action="{{ route('solvacas.destroy', $vacas->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{method_field('DELETE')}}
                                                 <BUTTON type="submit" class="btn btn-danger btn-sm">Eliminar</BUTTON>
                                             </form>
                                         </th>
                                         @else
-                                        @if($permiso->aprobado == 1)
+                                        @if($vacas->aprobado == 1)
                                             <th style="border-radius: 5px;" class="text-center" bgcolor="#B4BD46" ><font color="white">Aprobado</font></th>
                                         @else
                                              <th style="border-radius: 5px;" class="text-center" bgcolor="#B90D09"><font color="white">Rechazada</font></th>
@@ -63,7 +65,7 @@
                                     @endif
 
                                     <th>
-                                        <a href="{{action('PermisoController@show', $permiso->id)}}">
+                                        <a href="{{action('VacasSolController@show', $vacas->id)}}">
                                             <button type="button" class="btn-primary btn-sm"> Ver </button>
                                         </a>
                                     </th>
@@ -72,7 +74,7 @@
                                 @endif
                             </tbody>
                         </table>
-                        {!! $permisos->render() !!}
+                        {!! $solvacas->render() !!}
                     </div>
                 </div>
             </div>

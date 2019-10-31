@@ -145,7 +145,7 @@
                 <a href="#homeSubmenudef" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Mis Solicitudes</a>
                 <ul class="collapse" id="homeSubmenudef">
                     <li>
-                        <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                        <a href="{{ url('/solvacas') }}" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                     </li>
                     <li>
                         <a href="{{ url('/permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
