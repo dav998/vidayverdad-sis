@@ -34,8 +34,10 @@ class VacasSolController extends Controller
     }
     public function show($id)
     {
-        $data=SolVacas::find($id);
-        return view('solvacasver',compact('data'));
+        $user = Auth::user();
+        $solvacas=SolVacas::find($id);
+        $vacas = VacasUser::where('user_id', $user->id)->get()->first();
+        return view('vacasver',compact('vacas','user','solvacas'));
     }
     public function create(){
         $user = Auth::user();

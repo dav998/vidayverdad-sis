@@ -153,6 +153,7 @@
                 </ul>
                 </li>
             </ul>
+            <a href="{{ route('vacas.index') }}" class="list-group-item list-group-item-action bg-light">Reporte Vacaciones</a>
 
         </div>
     </div>

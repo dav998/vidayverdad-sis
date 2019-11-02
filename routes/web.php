@@ -42,3 +42,5 @@ Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middl
 Route::post('/crear_tolerancia', 'ToleranciaController@buscar');
 Route::resource('tolerancias','ToleranciaController');
 Route::post('/toleranciaoguardar', 'ToleranciaController@store');
+
+Route::resource('vacas','VacasController');
