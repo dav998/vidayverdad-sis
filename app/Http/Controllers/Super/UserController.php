@@ -61,6 +61,7 @@ class UserController extends Controller
         }
         $user ->save();
         $dias_disp = request('dias_disp');
+        $dias_disp1 = request('dias_disp');
         $newuser = User::where('ci', '=', request('ci'))->get()->first();
         $vacas = new VacasUser();
         $anoinsep = explode("-", $newuser->ano_ingreso);
@@ -93,6 +94,7 @@ class UserController extends Controller
 
         }
         $vacas->user_id = $newuser->id;
+        $vacas->dias_cuenta= $dias_disp1;
         $vacas->anos_trabajados = $anostrabajados;
         $vacas->dias_totales = $dias_totales;
         $vacas->dias_disp = $dias_disp;
@@ -103,7 +105,7 @@ class UserController extends Controller
         $role->role_id = request('rol');
         $role->save();
 
-        return redirect()->route('super.usuarios.create')->withInput()->with('success', 'Usuario Registrado');
+        return redirect()->route('super.usuarios.create')->with('success', 'Usuario Registrado');
 
     }
 

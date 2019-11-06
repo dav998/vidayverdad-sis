@@ -55,9 +55,9 @@
                                     Ingresar
                                 </button>
 
-                                <!--a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Olvid&oacute; su contrase&ntilde;a?
-                                </a-->
+                                </a>
                             </div>
                         </div>
                     </form>
