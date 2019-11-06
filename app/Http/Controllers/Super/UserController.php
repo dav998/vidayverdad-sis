@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Super;
 
+use App\Permiso;
 use App\Role;
 use App\RoleUser;
+use App\SolVacas;
 use App\User;
 use App\VacasUser;
 use Illuminate\Http\Request;
@@ -101,7 +103,7 @@ class UserController extends Controller
         $role->role_id = request('rol');
         $role->save();
 
-        return 'funciona';
+        return redirect()->route('super.usuarios.create')->withInput()->with('success', 'Usuario Registrado');
 
     }
 
@@ -170,6 +172,12 @@ class UserController extends Controller
 
             if($user){
                 $user->roles()->detach();
+                Permiso::where('user_id', $id)->delete();
+                VacasUser::where('user_id', $id)->delete();
+                //$user->permisos()->detach();
+                //$user->vacas()->detach();
+                SolVacas::where('user_id', $id)->delete();
+                //$user->solvacas()->delete();
                 $user->delete();
                 return redirect()->route('super.usuarios.index')->with('success', 'El Usuario ha sido eliminado.');
             }

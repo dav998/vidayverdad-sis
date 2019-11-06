@@ -61,21 +61,7 @@
                 <li>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Planes</a>
                 </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Pendientes</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos Horarios</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos en Aula</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Recreos</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Uniformes</a>
-                </li>
+
             </ul>
                 </li>
             </ul>
@@ -86,16 +72,10 @@
                     <a href="#dirhomeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
                     <ul class="collapse" id="dirhomeSubmenurep">
                         <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                            <a href="{{ route('dir.vacaciones.index') }}" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                         </li>
                         <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Atrasos en Aula</a>
-                        </li>
-                        <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Recreos</a>
-                        </li>
-                        <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Uniformes</a>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
                         </li>
                     </ul>
                 </li>
@@ -106,7 +86,18 @@
                     <a href="#dirhomeSubmenusol"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
                     <ul class="collapse" id="dirhomeSubmenusol">
                         <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                            <a href="#dirvacas"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                            <ul class="collapse" id="dirvacas">
+                                <li>
+                                    <a href="#" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#dirpermiso"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>

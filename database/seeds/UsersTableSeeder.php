@@ -1,5 +1,6 @@
 <?php
 
+use App\VacasUser;
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
@@ -108,6 +109,43 @@ class UsersTableSeeder extends Seeder
         $personal->roles()->attach($personalRole);
         $profesor->roles()->attach($profesorRole);
         $recepcion->roles()->attach($recepcionRole);
+
+       /* $vacas = new VacasUser();
+        $dias_disp = 2;
+        $anoinsep = explode("-", $admin->ano_ingreso);
+        $mytime = date('Y-m-d');
+        $anoactsep = explode("-", $mytime);
+        $anoactual = $anoactsep[0];
+        $anoingreso = $anoinsep[0];
+        $anostrabajados = $anoactual - $anoingreso;
+
+        if($anostrabajados > 0 and $anostrabajados <= 5){
+            $dias_disp = $dias_disp + 15;
+            $dias_totales=15;
+        }else{
+            if($anostrabajados > 5 and $anostrabajados <= 10){
+                $dias_disp = $dias_disp + 20;
+                $dias_totales=20;
+            }else
+            {
+                if($anostrabajados > 10){
+
+                    $dias_disp = $dias_disp + 30;
+                    $dias_totales=30;
+
+                }else{
+                    $dias_disp = 0;
+                    $dias_totales=0;
+                }
+            }
+
+
+        }
+        $vacas->user_id = $admin->id;
+        $vacas->anos_trabajados = $anostrabajados;
+        $vacas->dias_totales = $dias_totales;
+        $vacas->dias_disp = $dias_disp;
+        $vacas->save();*/
 
         factory(User::class, 10)->create();
     }

@@ -34,6 +34,7 @@ Route::post('/permisoguardar', 'PermisoController@store');
 
 Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('dir.')->group(function (){
     Route::resource('/permisos', 'PermisosAdmController');
+    Route::resource('/vacaciones', 'VacasAdmController');
 });
 Route::get('Dir/permisos/aproved', 'Dir\PermisosAdmController@aproved')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middleware(['auth', 'auth.dir']);

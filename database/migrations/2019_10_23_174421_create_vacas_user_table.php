@@ -18,6 +18,7 @@ class CreateVacasUserTable extends Migration
             $table->integer('user_id');
             $table->integer('anos_trabajados');
             $table->integer('dias_totales');
+            $table->integer('dias_cuenta');
             $table->integer('dias_disp');
             $table->timestamps();
         });

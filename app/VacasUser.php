@@ -8,7 +8,7 @@ class VacasUser extends Model
 {
     protected $fillable = [
 
-        'user_id', 'anos_trabajados','dias_totales', 'dias_disp'
+        'user_id', 'anos_trabajados','dias_totales', 'dias_cuenta', 'dias_disp'
     ];
 
     protected $table = "vacas_user";
