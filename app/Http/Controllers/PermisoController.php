@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Permiso;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PermisoController extends Controller
 {
@@ -59,6 +62,24 @@ class PermisoController extends Controller
         }
         $permiso ->save();
 
+        $infos = DB::table('permisos')
+            ->join('users', 'permisos.user_id', '=', 'users.id')
+            ->where('permisos.id' , '=', $permiso->id)
+            ->select('users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo')
+            ->get();
+
+
+        $data = array('infos' => $infos);
+        $to_name= 'Direccion';
+        $to_mail = 'daalfaro96@gmail.com';
+
+        Mail::send('emails.permiso_mail', $data, function ($message) use ($to_name, $to_mail){
+        $message->to($to_mail, $to_name)
+            ->subject('Solicitud de Permiso');
+        $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+    });
+
+
         /*$image = $request->file('imagen');
         $image->move('uploads', $image->getClientOriginalName());
         $multimedia->uri = $image->getClientOriginalName();
@@ -70,6 +91,7 @@ class PermisoController extends Controller
     public function destroy($id)
     {
         $permiso = Permiso::find($id);
+
                 $permiso->delete();
                 return redirect()->route('permisos.index')->with('danger', 'La Solicitud ha sido eliminada.');
     }

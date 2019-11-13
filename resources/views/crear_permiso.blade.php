@@ -1,6 +1,12 @@
 @extends('layouts.sidebar')
 
 @section('content')
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <div class="text-center m-t-lg">
     <h1>
         Permisos
@@ -29,12 +35,25 @@
         <input required value="{{old('suplente')}}"  type="text" class="form-control" name="suplente" id="suplente" placeholder="Nombre del Suplente">
     </div>
     <div class="form-group">
-        <label for="">Agrega Imagenes de Respaldo</label>
-        <input accept="image/*" type="file" class="-file-photo-o" name="imagen" id="imagen">
+        <label>Agrega Imagenes de Respaldo</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imagen" name="imagen">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <!--input accept="image/*" type="file"  class="file" data-show-preview="false" name="imagen" id="imagen"-->
     </div>
     <button type="submit"  class="btn btn-primary">Enviar</button>
 </form>
 </div>
 
 </div>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
 @endsection
