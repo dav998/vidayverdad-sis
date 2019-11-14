@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Permiso;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ToleranciaController extends Controller
 {
@@ -73,6 +75,25 @@ class ToleranciaController extends Controller
         $multimedia->uri = $image->getClientOriginalName();
         $multimedia->id_propiedad = $propiedad->id_propiedad;
         $multimedia->save();*/
-       return redirect()->route('tolerancias.index')->with('success', 'Solicitud Enviada.');
+
+        $infos = DB::table('permisos')
+            ->join('users', 'permisos.user_id', '=', 'users.id')
+            ->where('permisos.id' , '=', $permiso->id)
+            ->select('users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo')
+            ->get();
+
+
+        $data = array('infos' => $infos);
+        $to_name= 'Direccion';
+        $to_mail = 'daalfaro96@gmail.com';
+
+        Mail::send('emails.permiso_mail', $data, function ($message) use ($to_name, $to_mail){
+            $message->to($to_mail, $to_name)
+                ->subject('Solicitud de Permiso');
+            $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+        });
+
+
+        return redirect()->route('tolerancias.index')->with('success', 'Solicitud Enviada.');
     }
 }

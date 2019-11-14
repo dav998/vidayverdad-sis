@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Dir;
 
 use App\Permiso;
 use App\Role;
+use App\SolVacas;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class VacasAdmController extends Controller
@@ -37,24 +39,36 @@ class VacasAdmController extends Controller
 
     public function aproved()
     {
-        $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+        $datas = DB::table('solicitud_vacas as P')
+            ->select('P.fecha_inicio', 'P.tipo', 'P.created_at', 'P.fecha_fin', 'P.aprobado', 'P.dias','U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 1)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
-        return view('dir.permisos.aproved', compact('datas'));
+        return view('dir.vacaciones.aproved', compact('datas'));
         //return 'tonto';
 
     }
 
+    public function espera()
+    {
+        $datas = DB::table('solicitud_vacas as P')
+            ->select('P.fecha_inicio', 'P.tipo', 'P.created_at', 'P.fecha_fin', 'P.aprobado', 'P.dias','U.nombre', 'U.id','P.id as pid')
+            ->where('aprobado', 0)
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->orderBy('P.created_at')
+            ->paginate(10);
+        return view('dir.vacaciones.espera', compact('datas'));
+        //return 'tonto';
+
+    }
     public function rejected()
     {
-        $datas = DB::table('permisos as P')
-            ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
+        $datas = DB::table('solicitud_vacas as P')
+            ->select('P.fecha_inicio', 'P.tipo', 'P.created_at', 'P.fecha_fin', 'P.aprobado', 'P.dias','U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 2)
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->get();
-        return view('dir.permisos.rejected', compact('datas'));
+        return view('dir.vacaciones.rejected', compact('datas'));
         //return 'tonto';
 
     }
@@ -87,10 +101,10 @@ class VacasAdmController extends Controller
      */
     public function show($id)
     {
-        $data = Permiso::find($id);
+        $data = SolVacas::find($id);
         $user = User::where('id','=',$data->user_id)->get()->first();
 
-        return view('dir.permisos.show', compact('data', 'user'));
+        return view('dir.vacaciones.show', compact('data', 'user'));
     }
 
     /**
@@ -108,10 +122,10 @@ class VacasAdmController extends Controller
             ->get();*/
         //$data = Permiso::select('fecha_ausencia', 'motivo', 'created_at', 'cargo', 'suplente', 'id')->where('user_id', $id)->get();
         //$user = User::select('nombre')->where('id', $id)->get();
-        $data = Permiso::find($id);
+        $data = SolVacas::find($id);
         $user = User::where('id','=',$data->user_id)->get()->first();
 
-        return view('dir.permisos.edit', compact('data', 'user'));
+        return view('dir.vacaciones.edit', compact('data', 'user'));
     }
 
     /**
@@ -125,11 +139,29 @@ class VacasAdmController extends Controller
     {
 
 
-        DB::table('permisos')
+        DB::table('solicitud_vacas')
             ->where('id', $id)
             ->update(['aprobado' => request('aproved'),
                 'observaciones' => request('observacion') ]);
-        return redirect()->route('dir.permisos.index')->with('success', 'Solicitud Registrada.');
+
+        $infos = DB::table('solicitud_vacas')
+            ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
+            ->where('solicitud_vacas.id' , '=', $id)
+            ->select('users.nombre', 'users.cargo','solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias','solicitud_vacas.aprobado', 'solicitud_vacas.observaciones')
+            ->get();
+
+
+        $data = array('infos' => $infos);
+        $to_name= 'Direccion';
+        $to_mail = 'daalfaro96@gmail.com';
+
+        Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail){
+            $message->to($to_mail, $to_name)
+                ->subject('Solicitud de Vacacion');
+            $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+        });
+
+        return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
     }
 
     /**

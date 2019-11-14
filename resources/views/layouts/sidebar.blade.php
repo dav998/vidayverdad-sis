@@ -89,13 +89,13 @@
                             <a href="#dirvacas"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                             <ul class="collapse" id="dirvacas">
                                 <li>
-                                    <a href="#" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                                    <a href="{{ url('Dir/vacaciones/espera') }}" class="list-group-item list-group-item-action bg-light">Pendientes</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
+                                    <a href="{{ url('Dir/vacaciones/aproved') }}" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
+                                    <a href="{{ url('Dir/vacaciones/rejected') }}" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
                                 </li>
                             </ul>
                         </li>
@@ -144,7 +144,7 @@
                 </ul>
                 </li>
             </ul>
-            <a href="{{ route('vacas.index') }}" class="list-group-item list-group-item-action bg-light">Reporte Vacaciones</a>
+            <a href="{{ route('vacas.index') }}" class="list-group-item list-group-item-action bg-light">Reporte Mis Vacaciones</a>
 
         </div>
     </div>

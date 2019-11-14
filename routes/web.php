@@ -39,6 +39,10 @@ Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('
 Route::get('Dir/permisos/aproved', 'Dir\PermisosAdmController@aproved')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middleware(['auth', 'auth.dir']);
 
+Route::get('Dir/vacaciones/espera', 'Dir\VacasAdmController@espera')->middleware(['auth', 'auth.dir']);
+Route::get('Dir/vacaciones/aproved', 'Dir\VacasAdmController@aproved')->middleware(['auth', 'auth.dir']);
+Route::get('Dir/vacaciones/rejected', 'Dir\VacasAdmController@rejected')->middleware(['auth', 'auth.dir']);
+
 //Route::get('/crear_tolerancia','ToleranciaController@index')->name('tolerancias');
 Route::post('/crear_tolerancia', 'ToleranciaController@buscar');
 Route::resource('tolerancias','ToleranciaController');

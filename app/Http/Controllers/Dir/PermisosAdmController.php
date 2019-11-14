@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class PermisosAdmController extends Controller
@@ -45,6 +46,7 @@ class PermisosAdmController extends Controller
         //return 'tonto';
 
     }
+
 
     public function rejected()
     {
@@ -128,6 +130,26 @@ class PermisosAdmController extends Controller
             ->where('id', $id)
             ->update(['aprobado' => request('aproved'),
                 'observaciones' => request('observacion') ]);
+
+
+        $infos = DB::table('permisos')
+            ->join('users', 'permisos.user_id', '=', 'users.id')
+            ->where('permisos.id' , '=', $id)
+            ->select('users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo','permisos.aprobado', 'permisos.observaciones')
+            ->get();
+
+
+        $data = array('infos' => $infos);
+        $to_name= 'Direccion';
+        $to_mail = 'daalfaro96@gmail.com';
+
+        Mail::send('emails.permiso_mail_user', $data, function ($message) use ($to_name, $to_mail){
+            $message->to($to_mail, $to_name)
+                ->subject('Solicitud de Permiso');
+            $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+        });
+
+
         return redirect()->route('dir.permisos.index')->with('success', 'Solicitud Registrada.');
     }
 

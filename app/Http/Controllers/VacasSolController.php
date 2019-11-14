@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Permiso;
 use DateTime;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class VacasSolController extends Controller
 {
@@ -102,8 +104,27 @@ class VacasSolController extends Controller
             return redirect()->action('VacasSolController@create')->withInput()->with('warning', 'No puede tener dias pendientes negativos');
         }else{
             $vacas->save();
+            $infos = DB::table('solicitud_vacas')
+                ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
+                ->where('solicitud_vacas.id' , '=', $vacas->id)
+                ->select('users.nombre', 'users.cargo', 'solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias')
+                ->get();
+
+
+            $data = array('infos' => $infos);
+            $to_name= 'Direccion';
+            $to_mail = 'daalfaro96@gmail.com';
+
+            Mail::send('emails.vacas_mail', $data, function ($message) use ($to_name, $to_mail){
+                $message->to($to_mail, $to_name)
+                    ->subject('Solicitud de Permiso');
+                $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+            });
             return redirect()->action('VacasSolController@index')->with('success', 'Solicitud de vacacion enviada');
         }
+
+
+
 
         /*$image = $request->file('imagen');
         $image->move('uploads', $image->getClientOriginalName());

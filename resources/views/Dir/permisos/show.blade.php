@@ -96,7 +96,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Rechazadas/Ver</div>
                     <div class="panel-body">
-                        <legend>Ver Permiso Rechazado</legend>
+                        <legend>Ver Permiso </legend>
                         <div class="form-group">
                             <label for="">Nombre del Solicitante</label>
                             <input readonly  value="{{$user->nombre}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
