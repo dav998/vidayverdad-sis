@@ -31,7 +31,8 @@ class PermisosAdmController extends Controller
             ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 0)
             ->join('users as U', 'U.id', '=', 'P.user_id')
-            ->get();
+            ->orderBy('P.created_at', 'DESC')
+            ->paginate(10);
         return view('dir.permisos.index', compact('datas'));
     }
 
@@ -41,7 +42,8 @@ class PermisosAdmController extends Controller
             ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 1)
             ->join('users as U', 'U.id', '=', 'P.user_id')
-            ->get();
+            ->orderBy('P.created_at', 'DESC')
+            ->paginate(10);
         return view('dir.permisos.aproved', compact('datas'));
         //return 'tonto';
 
@@ -54,7 +56,8 @@ class PermisosAdmController extends Controller
             ->select('P.fecha_ausencia', 'P.tipo', 'P.created_at', 'P.cargo', 'P.aprobado', 'U.nombre', 'U.id','P.id as pid')
             ->where('aprobado', 2)
             ->join('users as U', 'U.id', '=', 'P.user_id')
-            ->get();
+            ->orderBy('P.created_at', 'DESC')
+            ->paginate(10);
         return view('dir.permisos.rejected', compact('datas'));
         //return 'tonto';
 

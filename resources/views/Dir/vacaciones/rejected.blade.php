@@ -11,6 +11,7 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
+                                <th class="text-center" scope="col" >Enviada en Fecha</th>
                                 <th class="text-center" scope="col" >Nombre</th>
                                 <th class="text-center" scope="col">Tipo de Vacaci&oacute;n</th>
                                 <th class="text-center" scope="col" >D&iacute;as de Vacaci&oacute;n</th>
@@ -29,6 +30,7 @@
                                 @foreach($datas as $data)
 
                                     <tr>
+                                        <td class="text-center">{{date('d/m/Y', strtotime($data->created_at))}}</td>
                                         <th  class="text-center">{{$data->nombre}}</th>
                                         @if($data->tipo == 1)
                                             <th style="border-radius: 5px; " >INVIERNO</th>

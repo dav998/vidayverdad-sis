@@ -25,6 +25,8 @@ Route::get('/super', function(){
 
 Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->name('super.')->group(function (){
     Route::resource('/usuarios', 'UserController');
+    Route::resource('/vacas', 'VacasSuperController');
+    Route::get('/upvacas', 'VacasSuperController@actualizar');
 });
 
 Route::resource('permisos','PermisoController');
@@ -42,6 +44,8 @@ Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middl
 Route::get('Dir/vacaciones/espera', 'Dir\VacasAdmController@espera')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/vacaciones/aproved', 'Dir\VacasAdmController@aproved')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/vacaciones/rejected', 'Dir\VacasAdmController@rejected')->middleware(['auth', 'auth.dir']);
+Route::get('Dir/vacaciones/personal', 'Dir\VacasAdmController@vacasper')->middleware(['auth', 'auth.dir']);
+Route::get('Dir/vacaciones/descargar', 'Dir\VacasAdmController@fun_pdf')->middleware(['auth', 'auth.dir']);
 
 //Route::get('/crear_tolerancia','ToleranciaController@index')->name('tolerancias');
 Route::post('/crear_tolerancia', 'ToleranciaController@buscar');

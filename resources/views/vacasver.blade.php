@@ -85,18 +85,21 @@
 
             </tr>
             <tr>
-                <th scope="row" colspan="5" class="text-center">Estado</th>
+                <th scope="row" colspan="2" class="text-center">Estado</th>
+                <th scope="row" colspan="3" class="text-center">Observaciones</th>
             </tr>
             <tr>
                 @if($solvacas->aprobado == 1)
-                <th scope="col" colspan="5" class="text-center"><button type="button" class="btn-success btn-lg"> APROBADO </button></th>
+                <td scope="col" colspan="2.5" class="text-center"><button type="button" class="btn-success btn-lg"> APROBADO </button></td>
                     @else
                 @if($solvacas->aprobado == 2)
-                        <th scope="col" colspan="5" class="text-center"><button type="button" class="btn-danger btn-lg"> RECHAZADO </button></th>
+                        <td scope="col" colspan="2.5" class="text-center"><button type="button" class="btn-danger btn-lg"> RECHAZADO </button></td>
                     @else
-                        <th scope="col" colspan="5" class="text-center"><button type="button" class="btn-dark btn-lg"> EN ESPERA </button></th>
+                        <td scope="col" colspan="2.5" class="text-center"><button type="button" class="btn-dark btn-lg"> EN ESPERA </button></td>
                     @endif
                     @endif
+                    <td scope="col" colspan="3" class="text-center">{{$solvacas->observaciones}}</td>
+
             </tr>
             </tbody>
         </table>

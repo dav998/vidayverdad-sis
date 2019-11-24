@@ -11,6 +11,7 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
+                                <th class="text-center" scope="col" >Enviada en Fecha</th>
                                 <th class="text-center" scope="col" >Nombre</th>
                                 <th class="text-center" scope="col" >D&iacute;a de Ausencia</th>
                                 <th class="text-center" scope="col" >Tipo de Solicitud</th>
@@ -23,10 +24,11 @@
                             </thead>
                             <tbody>
                             @if($datas->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay solicitudes rechazadas</th></tr>
+                                <tr><th colspan="7" class="text-center">No hay solicitudes rechazadas</th></tr>
                             @else
                             @foreach($datas as $data)
                                 <tr>
+                                    <th class="text-center">{{date('d/m/Y', strtotime($data->created_at))}}</th>
                                     <th  class="text-center">{{$data->nombre}}</th>
                                     <th class="text-center">{{$data->fecha_ausencia}}</th>
                                     @if($data->tipo == 1)

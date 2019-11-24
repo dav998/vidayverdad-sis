@@ -70,6 +70,7 @@ $factory->afterCreating(User::class, function ($user, $faker){
     $vacas->anos_trabajados = $anostrabajados;
     $vacas->dias_totales = $dias_totales;
     $vacas->dias_disp = $dias_disp;
+    $vacas->dias_tomados = 0;
     $vacas->save();
 
 

@@ -18,7 +18,7 @@ Estimado(a) <strong>{{$info->nombre}}</strong>,<br>
 @endif
 <br>
 Observaciones:
-<strong>{ $info->observaciones}}</strong><br>
+<strong>{{$info->observaciones}}</strong><br>
 
 Datos de Solicitud:
 

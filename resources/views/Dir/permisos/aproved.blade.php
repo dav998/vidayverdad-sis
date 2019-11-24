@@ -27,6 +27,7 @@
                             @else
                             @foreach($datas as $data)
                                 <tr>
+                                    <th class="text-center">{{date('d/m/Y', strtotime($data->created_at))}}</th>
                                     <th  class="text-center">{{$data->nombre}}</th>
                                     <th class="text-center">{{$data->fecha_ausencia}}</th>
                                     @if($data->tipo == 1)

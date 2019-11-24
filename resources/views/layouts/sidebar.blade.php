@@ -18,12 +18,19 @@
 
 </head>
 
+<style type="text/css" media="print">
+    .NonPrintable
+    {
+        display: none;
+    }
+</style>
+
 <body>
 
-<div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper" media="print">
 
     <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="bg-light border-right" id="sidebar-wrapper" >
         <div class="sidebar-heading"> <img src="{{ asset('images/vyv.jpg')}}" width="150" height="100" alt="Unidad educativa Vida y Verdad"> </div>
         <div class="list-group list-group-flush">
             @hasrole('super')
@@ -32,6 +39,7 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Registrar Horarios</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
+            <a href="{{ route('super.vacas.index') }}" class="list-group-item list-group-item-action bg-light">Actualizar Vacaciones</a>
             @endhasrole
             @hasrole('administrador')
             <ul class="list-group">
@@ -75,7 +83,7 @@
                             <a href="{{ route('dir.vacaciones.index') }}" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                         </li>
                         <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
+                            <a href="{{ url('Dir/vacaciones/personal') }}" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
                         </li>
                     </ul>
                 </li>

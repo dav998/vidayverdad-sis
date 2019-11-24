@@ -19,6 +19,7 @@
                         <div class="form-group">
                             <label for="">Cargo</label>
                             <input readonly  value="{{$user->cargo}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                            <input hidden  value="{{$user->id}}" type="text" class="hidden" name="user_id" id="user_id">
                         </div>
 
                         <div class="form-group">
@@ -52,7 +53,7 @@
 
                         <div class="form-group">
                             <label for="">Dias de Vacaci&oacute;n</label>
-                            <input readonly required value="{{$data->dias}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del solicitante">
+                            <input readonly required value="{{$data->dias}}"  type="text" class="form-control" name="dias" id="dias" placeholder="Cargo del solicitante">
                         </div>
                         <div class="form-group">
                             <label for="">Aceptar o Rechazar Solicitud</label><br>

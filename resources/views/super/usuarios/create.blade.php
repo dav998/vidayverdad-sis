@@ -3,7 +3,7 @@
 @section('content')
     <div class="text-center m-t-lg">
         <h1>
-            Permisos
+            Registrar Usuario
         </h1>
     </div>
     <form action="{{ route('super.usuarios.store') }}" method="POST" role="form" enctype="multipart/form-data" id="prop-form">

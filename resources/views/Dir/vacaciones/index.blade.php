@@ -34,29 +34,31 @@
     }
 </script>
 
-    <div class="container" >
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
+<style>
 
-                    <div class="panel-body">
+
+</style>
+<body>
+<div class="row">
+                    <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
                         <table class="table" id="vacas">
                             <thead class="thead-dark">
-                            <tr>
+                            <tr style="overflow-x: auto">
                                 <th class="text-center" scope="col" >Nombre y Apellido</th>
                                 <th class="text-center" scope="col" >Cargo</th>
                                 <th class="text-center" scope="col" >Fecha de Ingreso</th>
-                                <th class="text-center" scope="col">A&ntilde;os trabajados al {{Date('d/m/Y')}}</th>
+                                <th class="text-center" scope="col" >A&ntilde;os trabajados al {{Date('d/m/Y')}}</th>
                                 <th class="text-center" scope="col" >Dias de Vacacion por Antig&utilde;edad</th>
-                                <th class="text-center" scope="col" class="text-center">Dias disponibles Gestion {{now()->year}}</th>
+                                <th class="text-center" scope="col" >Dias Disponibles Gestion {{now()->year}}</th>
+                                <th class="text-center" scope="col" >Dias de Vacacion Gestion {{now()->year}}</th>
+                                <th class="text-center" scope="col" >Dias Tomados Gestion {{now()->year}}</th>
                                 <th class="text-center" scope="col" >Total Dias de Vacacion</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             @if($datas->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay registro de vacaciones</th></tr>
+                                <tr><th colspan="9" class="text-center">No hay registro de vacaciones</th></tr>
                             @else
                             @foreach($datas as $data)
 
@@ -67,16 +69,14 @@
                                     <th class="text-center">{{$data->anos_trabajados}}</th>
                                     <th class="text-center">{{$data->dias_totales}}</th>
                                     <th class="text-center">{{$data->dias_cuenta}}</th>
+                                    <th class="text-center">{{$data->dias_cuenta + $data->dias_totales}}</th>
+                                    <th class="text-center">{{$data->dias_tomados}}</th>
                                     <th class="text-center">{{$data->dias_disp}}</th>
                                 </tr>
                             @endforeach
                                 @endif
                             </tbody>
                         </table>
-                        <button class="btn-primary" onclick="exportTableToExcel('vacas', 'Reporte_vacaciones')">Descargar en Excel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<button class="btn-primary" onclick="exportTableToExcel('vacas', 'Reporte_vacaciones')">Descargar en Excel</button>
 @endsection

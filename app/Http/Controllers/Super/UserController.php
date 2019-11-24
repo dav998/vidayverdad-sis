@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Super;
 
+use App\Asistencia;
 use App\Permiso;
 use App\Role;
 use App\RoleUser;
@@ -98,6 +99,7 @@ class UserController extends Controller
         $vacas->anos_trabajados = $anostrabajados;
         $vacas->dias_totales = $dias_totales;
         $vacas->dias_disp = $dias_disp;
+        $vacas->dias_tomados = 0;
         $vacas->save();
 
         $role = new RoleUser();
@@ -179,6 +181,7 @@ class UserController extends Controller
                 //$user->permisos()->detach();
                 //$user->vacas()->detach();
                 SolVacas::where('user_id', $id)->delete();
+                Asistencia::where('user_id', $id)->delete();
                 //$user->solvacas()->delete();
                 $user->delete();
                 return redirect()->route('super.usuarios.index')->with('success', 'El Usuario ha sido eliminado.');

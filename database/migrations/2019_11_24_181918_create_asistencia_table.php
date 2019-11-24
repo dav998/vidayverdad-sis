@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVacasUserTable extends Migration
+class CreateAsistenciaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateVacasUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacas_user', function (Blueprint $table) {
+        Schema::create('asistencia', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('anos_trabajados');
-            $table->integer('dias_totales');
-            $table->integer('dias_cuenta');
-            $table->integer('dias_disp');
-            $table->integer('dias_tomados');
+            $table->dateTime('time');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateVacasUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacas_user');
+        Schema::dropIfExists('asistencia');
     }
 }
