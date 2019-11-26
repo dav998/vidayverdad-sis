@@ -2,7 +2,7 @@
 
 @section('content')
 <script>
-    function exportTableToExcel(tableID, filename = ''){
+    function exportTableToExcels(tableID, filename = ''){
     var downloadLink;
     var dataType = 'application/vnd.ms-excel';
     var tableSelect = document.getElementById(tableID);
@@ -33,15 +33,9 @@
     }
     }
 </script>
-
-<style>
-
-
-</style>
-<body>
 <div class="row">
                     <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
-                        <table class="table" id="vacas">
+                        <table class="table" id="reportevacas">
                             <thead class="thead-dark">
                             <tr style="overflow-x: auto">
                                 <th class="text-center" scope="col" >Nombre y Apellido</th>
@@ -78,5 +72,5 @@
                             </tbody>
                         </table>
 </div>
-<button class="btn-primary" onclick="exportTableToExcel('vacas', 'Reporte_vacaciones')">Descargar en Excel</button>
+<button class="btn-primary" onclick="exportTableToExcels('reportevacas', 'Reporte_vacaciones')">Descargar en Excel</button>
 @endsection
