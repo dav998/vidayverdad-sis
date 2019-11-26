@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class AcessDir
+class AcessAdm
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class AcessDir
     public function handle($request, Closure $next)
     {
         //Auth::user()->hasAnyRole('super');
-        if(Auth::user()->hasAnyRoles(['direccion', 'administrador'])){
+        if(Auth::user()->hasAnyRoles(['administrador'])){
             return $next($request);
         }
         return redirect('home');

@@ -34,23 +34,72 @@
         <div class="sidebar-heading"> <img src="{{ asset('images/vyv.jpg')}}" width="150" height="100" alt="Unidad educativa Vida y Verdad"> </div>
         <div class="list-group list-group-flush">
             @hasrole('super')
-            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Administrar Usuarios</a>
-            <a href="{{ route('super.usuarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuarios</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Registrar Horarios</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
-            <a href="{{ route('super.vacas.index') }}" class="list-group-item list-group-item-action bg-light">Actualizar Vacaciones</a>
-            @endhasrole
-            @hasrole('administrador')
-            <ul class="list-group">
+            <ul class="list-group"></ul>
+            <a href="#superuser" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Usuarios</a>
+                    <ul class="collapse" id="superuser">
+                        <li>
+                            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Roles de Usuario</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('super.usuarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuario</a>
+                        </li>
+                        <li>
+                            <a href="#" class="list-group-item list-group-item-action bg-light">Editar Usuario</a>
+                        </li>
+                    </ul>
+            <a href="#superhora" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
+            <ul class="collapse" id="superhora">
                 <li>
-            <a href="#homeSubmenusol" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Solicitudes</a>
-            <ul class="collapse" id="homeSubmenusol">
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Registrar/Actualizar Horario</a>
                 </li>
                 <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
+                </li>
+            </ul>
+            <a href="#supervacas" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Vacaciones</a>
+            <ul class="collapse" id="supervacas">
+                <li>
+                    <a href="{{action('Super\VacasSuperController@invierno')}}" class="list-group-item list-group-item-action bg-light">Actualizar Vacaciones de Invierno</a>
+                </li>
+                <li>
+                    <a href="{{action('Super\VacasSuperController@verano')}}" class="list-group-item list-group-item-action bg-light">Actualizar Vacaciones de Fin de A&ntilde;o</a>
+                </li>
+                <li>
+                    <a href="{{ route('super.vacas.index') }}" class="list-group-item list-group-item-action bg-light">Actualizar Info. Vacaciones</a>
+                </li>
+            </ul>
+            @endhasrole
+            @hasrole('administrador')
+            <ul class="list-group"></ul>
+            <a href="#homeSubmenusol" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Solicitudes</a>
+            <ul class="collapse" id="homeSubmenusol">
+                <li>
+                <a href="#dirvacas"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                <ul class="collapse" id="dirvacas">
+                    <li>
+                        <a href="{{ url('Dir/vacaciones/espera') }}" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('Dir/vacaciones/aproved') }}" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('Dir/vacaciones/rejected') }}" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
+                    </li>
+                </ul>
+                </li>
+                <li>
+                    <a href="#dirpermiso"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                    <ul class="collapse" id="dirpermiso">
+                        <li>
+                            <a href="{{ route('dir.permisos.index') }}" class="list-group-item list-group-item-action bg-light">Pendientes</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('Dir/permisos/aproved') }}" class="list-group-item list-group-item-action bg-light">Aprobadas</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('Dir/permisos/rejected') }}" class="list-group-item list-group-item-action bg-light">Rechazadas</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
                 </li>
@@ -61,13 +110,13 @@
                     <a href="#homeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
                     <ul class="collapse" id="homeSubmenurep">
                 <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                    <a href="{{ route('dir.vacaciones.index') }}" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
                 </li>
+                        <li>
+                            <a href="{{ url('Dir/vacaciones/personal') }}" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
+                        </li>
                 <li>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Planes</a>
                 </li>
 
             </ul>
@@ -144,7 +193,21 @@
                 <a href="#homeSubmenudef" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Mis Solicitudes</a>
                 <ul class="collapse" id="homeSubmenudef">
                     <li>
-                        <a href="{{ url('/solvacas') }}" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                        <a href="#vacas" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Vacaciones</a>
+                        <ul class="collapse" id="vacas">
+                            <li>
+                                <a href="{{ url('/solvacas') }}" class="list-group-item list-group-item-action bg-light">Ver</a>
+                            </li>
+                            <li>
+                                <a href="{{action('VacasSolController@invierno')}}" class="list-group-item list-group-item-action bg-light">Invierno</a>
+                            </li>
+                            <li>
+                                <a href="{{action('VacasSolController@verano')}}" class="list-group-item list-group-item-action bg-light">Fin de A&ntilde;o</a>
+                            </li>
+                            <li>
+                                <a href="{{action('VacasSolController@create')}}" class="list-group-item list-group-item-action bg-light">A Cuenta</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ url('/permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>

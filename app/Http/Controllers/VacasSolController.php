@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SolVacas;
+use App\Vacas;
 use App\VacasUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,8 @@ class VacasSolController extends Controller
         $solvacas = SolVacas::where('user_id', $user->id)->orderBy('created_at', 'DES')->paginate(10);
         return view('/solvacas', compact('solvacas', 'user'));
     }
+
+
     public function show($id)
     {
         $user = Auth::user();
@@ -45,7 +48,19 @@ class VacasSolController extends Controller
         $user = Auth::user();
         return view('pre_vacas', compact('user'));
     }
-    public function dias(Request $request){
+    public function invierno(){
+        $user = Auth::user();
+        $vacasuser = VacasUser::where('user_id', $user->id)->get()->first();
+        $vacas = Vacas::where('id', 1)->get()->first();
+        return view('otras_vacas', compact('user', 'vacas', 'vacasuser'));
+    }
+    public function verano(){
+        $user = Auth::user();
+        $vacasuser = VacasUser::where('user_id', $user->id)->get()->first();
+        $vacas = Vacas::where('id', 2)->get()->first();
+        return view('otras_vacas', compact('user', 'vacas','vacasuser'));
+    }
+    public function dias(Request $request, $id){
 
         $user = Auth::user();
         $this->validate($request,[ 'fecha_inicio'=>'required|date|date_format:Y-m-d|after:hoy',
@@ -84,7 +99,7 @@ class VacasSolController extends Controller
         }
         $dias = getWorkingDays($fdate, $tdate);
         $vacas=VacasUser::where('user_id','=',$user->id)->get()->first();
-        return view('/crear_vacas', compact('dias', 'user', 'vacas', 'fdate', 'tdate'));
+        return view('/crear_vacas', compact('dias', 'user', 'vacas', 'fdate', 'tdate','id'));
 
         }
 
@@ -93,7 +108,7 @@ class VacasSolController extends Controller
         //dd($request->all());
 
         $vacas = new SolVacas();
-        $vacas->tipo = 0;
+        $vacas->tipo = request('idvaca');
         $vacas->user_id = request('id');
         $vacas->fecha_inicio = request('fecha_inicio');
         $vacas->fecha_fin = request('fecha_fin');

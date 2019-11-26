@@ -27,14 +27,18 @@ Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->n
     Route::resource('/usuarios', 'UserController');
     Route::resource('/vacas', 'VacasSuperController');
     Route::get('/upvacas', 'VacasSuperController@actualizar');
+    Route::get('/invierno', 'VacasSuperController@invierno');
+    Route::get('/verano', 'VacasSuperController@verano');
 });
 
 Route::resource('permisos','PermisoController');
 Route::resource('solvacas','VacasSolController');
-Route::post('/crear_vacas', 'VacasSolController@dias');
+Route::get('/solverano', 'VacasSolController@verano');
+Route::get('/solinvierno', 'VacasSolController@invierno');
+Route::post('/crear_vacas/{id}', 'VacasSolController@dias');
 Route::post('/permisoguardar', 'PermisoController@store');
 
-Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('dir.')->group(function (){
+Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir', 'auth.adm'])->name('dir.')->group(function (){
     Route::resource('/permisos', 'PermisosAdmController');
     Route::resource('/vacaciones', 'VacasAdmController');
 });
@@ -53,3 +57,4 @@ Route::resource('tolerancias','ToleranciaController');
 Route::post('/toleranciaoguardar', 'ToleranciaController@store');
 
 Route::resource('vacas','VacasController');
+

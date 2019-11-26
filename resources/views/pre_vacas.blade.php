@@ -20,7 +20,7 @@
     </div>
 
     <div>
-    <form action="{{url('/crear_vacas')}}" method="POST" role="form" enctype="multipart/form-data" id="prop-form">
+    <form action="{{url('/crear_vacas', $vacas=0)}}" method="POST" role="form" enctype="multipart/form-data" id="prop-form">
         {{ csrf_field() }}
         <legend>Solicitar Vacaciones</legend>
         <div class="form-group">

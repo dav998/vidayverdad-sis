@@ -24,6 +24,19 @@
         <input readonly value="{{$user->cargo}}"  type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo del solicitante">
     </div>
     <div class="form-group">
+        <label for="">Tipo de Solicitud</label>
+        @if($id == 1)
+        <input readonly value="Vacaciones de Invierno"  type="text" class="form-control" >
+            @else
+        @if($id == 2)
+                <input readonly value="Vacaciones de Fin de A&ntilde;o"  type="text" class="form-control">
+            @else
+                <input readonly value="Vacaciones A Cuenta"  type="text" class="form-control" >
+            @endif
+            @endif
+        <input hidden value="{{$id}}" name="idvaca" id="idvaca">
+    </div>
+    <div class="form-group">
         <label for="">Fecha Inicio de Vacacion </label>
         <input readonly required value="{{$fdate}}" type="date" class="form-control" name="fecha_inicio" id="fecha_inicio">
     </div>

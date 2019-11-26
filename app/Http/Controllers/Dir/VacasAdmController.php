@@ -166,64 +166,70 @@ class VacasAdmController extends Controller
     public function update(Request $request, $id)
     {
 
+        $diasvacas = SolVacas::where('id', $id)->get()->first();
+        $diasuser = VacasUser::where('user_id', $diasvacas->user_id)->get()->first();
 
-        DB::table('solicitud_vacas')
-            ->where('id', $id)
-            ->update(['aprobado' => request('aproved'),
-                'observaciones' => request('observacion') ]);
+        if($diasvacas->dias > $diasuser->dias_disp && request('aproved') == 1){
+            return redirect()->action('Dir\VacasAdmController@edit', $id)->with('danger', 'Los dias de vacacion del empleado son menores al solicitado. Por favor rechace la solicitud.');
 
-        $dias_tomados= request('dias');
-        $aprovado = request('aproved');
+        }else {
+            DB::table('solicitud_vacas')
+                ->where('id', $id)
+                ->update(['aprobado' => request('aproved'),
+                    'observaciones' => request('observacion')]);
 
-        if($aprovado == 1){
+            $dias_tomados = request('dias');
+            $aprovado = request('aproved');
 
-            $vacas = VacasUser::where('user_id','=',request('user_id'))->get()->first();
+            if ($aprovado == 1) {
 
-            DB::table('vacas_user')
-                ->where('user_id', request('user_id'))
-                ->update(['dias_disp' => $vacas->dias_disp - $dias_tomados,
-                    'dias_tomados' => $vacas->dias_tomados + $dias_tomados]);
+                $vacas = VacasUser::where('user_id', '=', request('user_id'))->get()->first();
 
-            $infos = DB::table('solicitud_vacas')
-                ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
-                ->where('solicitud_vacas.id' , '=', $id)
-                ->select('users.nombre', 'users.cargo','solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias','solicitud_vacas.aprobado', 'solicitud_vacas.observaciones')
-                ->get();
+                DB::table('vacas_user')
+                    ->where('user_id', request('user_id'))
+                    ->update(['dias_disp' => $vacas->dias_disp - $dias_tomados,
+                        'dias_tomados' => $vacas->dias_tomados + $dias_tomados]);
 
-
-            $data = array('infos' => $infos);
-            $to_name= 'Direccion';
-            $to_mail = 'daalfaro96@gmail.com';
-
-            Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail){
-                $message->to($to_mail, $to_name)
-                    ->subject('Solicitud de Vacacion');
-                $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
-            });
-
-            return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
-
-        }else
-        {
-
-            $infos = DB::table('solicitud_vacas')
-                ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
-                ->where('solicitud_vacas.id' , '=', $id)
-                ->select('users.nombre', 'users.cargo','solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias','solicitud_vacas.aprobado', 'solicitud_vacas.observaciones')
-                ->get();
+                $infos = DB::table('solicitud_vacas')
+                    ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
+                    ->where('solicitud_vacas.id', '=', $id)
+                    ->select('users.nombre', 'users.cargo', 'solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias', 'solicitud_vacas.aprobado', 'solicitud_vacas.observaciones')
+                    ->get();
 
 
-            $data = array('infos' => $infos);
-            $to_name= 'Direccion';
-            $to_mail = 'daalfaro96@gmail.com';
+                $data = array('infos' => $infos);
+                $to_name = 'Direccion';
+                $to_mail = 'daalfaro96@gmail.com';
 
-            Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail){
-                $message->to($to_mail, $to_name)
-                    ->subject('Solicitud de Vacacion');
-                $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
-            });
+                Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail) {
+                    $message->to($to_mail, $to_name)
+                        ->subject('Solicitud de Vacacion');
+                    $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+                });
 
-            return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
+                return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
+
+            } else {
+
+                $infos = DB::table('solicitud_vacas')
+                    ->join('users', 'solicitud_vacas.user_id', '=', 'users.id')
+                    ->where('solicitud_vacas.id', '=', $id)
+                    ->select('users.nombre', 'users.cargo', 'solicitud_vacas.fecha_inicio', 'solicitud_vacas.fecha_fin', 'solicitud_vacas.tipo', 'solicitud_vacas.dias', 'solicitud_vacas.aprobado', 'solicitud_vacas.observaciones')
+                    ->get();
+
+
+                $data = array('infos' => $infos);
+                $to_name = 'Direccion';
+                $to_mail = 'daalfaro96@gmail.com';
+
+                Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail) {
+                    $message->to($to_mail, $to_name)
+                        ->subject('Solicitud de Vacacion');
+                    $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+                });
+
+                return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
+            }
         }
 
     }

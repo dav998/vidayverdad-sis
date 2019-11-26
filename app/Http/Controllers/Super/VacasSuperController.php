@@ -7,12 +7,14 @@ use App\Role;
 use App\RoleUser;
 use App\SolVacas;
 use App\User;
+use App\Vacas;
 use App\VacasUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use function App\Http\Controllers\getWorkingDays;
 use function MongoDB\Driver\Monitoring\addSubscriber;
 
 
@@ -67,9 +69,11 @@ class VacasSuperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        //
+        $invierno = Vacas::find($id);
+       return view('super.vacas.edit', compact('invierno'));
+        //return 'editame papu';
     }
 
     /**
@@ -79,9 +83,69 @@ class VacasSuperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
-       //
+
+        $this->validate($request,[ 'fecha_inicio'=>'required|date|date_format:Y-m-d|after:hoy',
+            'fecha_fin'=>'required|date_format:Y-m-d|after:fecha_inicio',]);
+
+        $fdate = request('fecha_inicio');
+        $tdate = request('fecha_fin');
+
+        function getWorkingDay($startDate, $endDate)
+        {
+            $begin = strtotime($startDate);
+            $end = strtotime($endDate);
+            if ($begin > $end) {
+                echo "startdate is in the future! <br />";
+
+                return 0;
+            } else {
+                $no_days = 0;
+                $weekends = 0;
+                while ($begin <= $end) {
+                    $no_days++; // no of days in the given interval
+                    $what_day = date("N", $begin);
+                    if ($what_day > 5) { // 6 and 7 are weekend days
+                        $weekends++;
+                    };
+                    $begin += 86400; // +1 day
+                };
+                $working_days = $no_days - $weekends;
+
+                return $working_days;
+            }
+        }
+
+        $dias = getWorkingDay($fdate, $tdate);
+
+        DB::table('vacaciones')
+            ->where('id', $id)
+            ->update(['fecha_inicio' => request('fecha_inicio'),
+                'fecha_fin' => request('fecha_fin'),
+                'dias' => $dias]);
+
+        if($id == 1){
+            return redirect()->action('Super\VacasSuperController@invierno')->with('success', 'Vacaciones de Invierno Actualizada');
+        }else{
+            return redirect()->action('Super\VacasSuperController@verano')->with('success', 'Vacaciones de Fin de Año Actualizada');
+        }
+
+    }
+
+    public function invierno(){
+
+        $invierno = Vacas::where('id', 1)->get()->first();
+        return view('super.vacas.invierno', compact('invierno'));
+        //return 'invierno';
+
+    }
+
+    public function verano(){
+
+        $invierno = Vacas::where('id', 2)->get()->first();
+        return view('super.vacas.verano', compact('invierno'));
+
     }
     public function actualizar(){
 
