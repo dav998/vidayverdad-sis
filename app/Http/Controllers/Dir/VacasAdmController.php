@@ -84,7 +84,7 @@ class VacasAdmController extends Controller
             ->whereNotNull('U.ano_ingreso')
             ->join('users as U', 'U.id', '=', 'P.user_id')
             ->orderBy('U.ano_ingreso', 'asc')
-            ->get();
+            ->paginate(4);
         return view('dir.vacaciones.personal', compact('datas'));
 
     }

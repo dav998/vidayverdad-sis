@@ -49,6 +49,21 @@ class PermisosAdmController extends Controller
 
     }
 
+    public function reporte(){
+        $datas = DB::table('permisos as P')
+            ->select('U.nombre', 'U.cargo',
+            DB::raw('sum((case when P.aprobado =  1  then 1 else 0 end)) as aprobado'),
+            DB::raw('sum((case when P.aprobado =  2  then 1 else 0 end)) as rechazado'),
+                DB::raw('sum((case when P.aprobado =  0  then 1 else 0 end)) as espera'),
+                DB::raw('count(P.user_id) as solicitudes_enviadas'))
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->groupBy('U.nombre', 'U.cargo')
+            ->get();
+       return view('dir.permisos.reporte', compact('datas'));
+        //return $datas;
+
+    }
+
 
     public function rejected()
     {

@@ -26,14 +26,17 @@
         }
 
         /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
+    </style>
+
+    <style type="text/css">
+        @media print {
+            #printbtn {
+                display :  none;
             }
         }
     </style>
     <body>
-    <button onclick="myFunction()" class="btn-primary">Pasar a PDF</button>
+    <button id="printbtn" onclick="myFunction()" class="btn-primary">Pasar a PDF</button>
     @foreach($datas as $data)
         <div id="print">
         <br><br><div class="container">
@@ -80,6 +83,10 @@
     </TABLE>
     </div>
     @endforeach
+        </div>
+        <div class="form-group" id="printbtn">
+            <br>
+        {{ $datas->links() }}
         </div>
     </body>
 

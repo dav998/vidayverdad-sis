@@ -65,6 +65,7 @@
                         </table>
 
                     </div>
+                    {{ $datas->links() }}
                 </div>
             </div>
         </div>

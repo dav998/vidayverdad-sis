@@ -116,7 +116,7 @@
                             <a href="{{ url('Dir/vacaciones/personal') }}" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
                         </li>
                 <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                    <a href="{{action('Dir\PermisosAdmController@reporte')}}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
                 </li>
 
             </ul>

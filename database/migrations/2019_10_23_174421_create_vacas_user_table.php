@@ -21,6 +21,7 @@ class CreateVacasUserTable extends Migration
             $table->integer('dias_cuenta');
             $table->integer('dias_disp');
             $table->integer('dias_tomados');
+            $table->date('actualizado')->nullable();
             $table->timestamps();
         });
     }

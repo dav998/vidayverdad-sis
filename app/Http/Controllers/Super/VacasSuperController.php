@@ -149,33 +149,41 @@ class VacasSuperController extends Controller
     }
     public function actualizar(){
 
-       VacasUser::increment("anos_trabajados",1);
-       VacasUser::where('anos_trabajados', '<=', 5)->update(['dias_totales' => 15]);
-       VacasUser::whereBetween('anos_trabajados', [6,10])->update(['dias_totales' => 20]);
-       VacasUser::where('anos_trabajados', '>', 10)->update(['dias_totales' => 30]);
+        $actualizado = VacasUser::where('id', 1)->get()->first();
+        $ldate = date('Y-m-d');
+
+        if($actualizado->actualizado < $ldate) {
+
+            DB::table('vacas_user')->update(['actualizado' => $ldate]);
+            VacasUser::increment("anos_trabajados", 1);
+            VacasUser::where('anos_trabajados', '<=', 5)->update(['dias_totales' => 15]);
+            VacasUser::whereBetween('anos_trabajados', [6, 10])->update(['dias_totales' => 20]);
+            VacasUser::where('anos_trabajados', '>', 10)->update(['dias_totales' => 30]);
 
 
+            $vacas = VacasUser::all();
+            foreach ($vacas as $vaca) {
 
-        $vacas = VacasUser::all();
-        foreach ($vacas as $vaca){
+                DB::table('vacas_user')
+                    ->where('id', $vaca->id)
+                    ->update(['dias_cuenta' => $vaca->dias_disp,
+                        'dias_tomados' => 0]);
+            }
 
-            DB::table('vacas_user')
-                ->where('id', $vaca->id)
-                ->update(['dias_cuenta' => $vaca->dias_disp,
-                    'dias_tomados' => 0]);
+            $vacass = VacasUser::all();
+            foreach ($vacass as $vacas) {
+
+                DB::table('vacas_user')
+                    ->where('id', $vacas->id)
+                    ->update(['dias_disp' => $vacas->dias_cuenta + $vacas->dias_totales]);
+            }
+
+            return redirect()->action('Super\VacasSuperController@index')->with('success', 'Datos Vacacionales Actualizados');
         }
+        else{
 
-        $vacass = VacasUser::all();
-        foreach ($vacass as $vacas){
-
-            DB::table('vacas_user')
-                ->where('id', $vacas->id)
-                ->update(['dias_disp' => $vacas->dias_cuenta + $vacas->dias_totales]);
+            return redirect()->action('Super\VacasSuperController@index')->with('danger', 'Los datos vacacionales ya fueron actualizados. Por favor actualicelos la siguiente gestion');
         }
-
-
-        return 'amen';
-
 
 
 
