@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('dir')
         ]);
 
-        $secretaria_dir = User::create([
+        /*$secretaria_dir = User::create([
             'nombre'=>'Secre',
             'ci' => '3333333',
             'cargo'=>'Secretaria',
@@ -90,7 +90,7 @@ class UsersTableSeeder extends Seeder
             'cargo' => 'Profesor Matematicas',
             'email' => 'profe@profe.com',
             'password' => bcrypt('profesor')
-        ]);
+        ]);*/
 
         $recepcion = User::create([
             'nombre'=>'Aleida',
@@ -103,11 +103,11 @@ class UsersTableSeeder extends Seeder
         $super->roles()->attach($superRole);
         $admin->roles()->attach($adminRole);
         $direccion->roles()->attach($direccionRole);
-        $secretaria_dir->roles()->attach($secretaria_dirRole);
-        $sistemas->roles()->attach($sistemasRole);
+        //$secretaria_dir->roles()->attach($secretaria_dirRole);
+        /*$sistemas->roles()->attach($sistemasRole);
         $supervisor->roles()->attach($supervisorRole);
         $personal->roles()->attach($personalRole);
-        $profesor->roles()->attach($profesorRole);
+        $profesor->roles()->attach($profesorRole);*/
         $recepcion->roles()->attach($recepcionRole);
 
        /* $vacas = new VacasUser();

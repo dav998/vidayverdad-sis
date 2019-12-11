@@ -25,9 +25,9 @@
         <div class="form-group">
             <label for="">Rol</label><br>
             <select class="custom-select" id="rol" name="rol" >
-                <option value="6" >Supervisor</option>
-                <option value="7" >Profesor</option>
-                <option value="8" >Personal</option>
+                @foreach($roles as $rol)
+                    <option value="{{$rol->id}}">{{$rol->nombre}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group">

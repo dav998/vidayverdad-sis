@@ -38,19 +38,19 @@
             <a href="#superuser" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Usuarios</a>
                     <ul class="collapse" id="superuser">
                         <li>
-                            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Roles de Usuario</a>
+                            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Editar Usuario</a>
                         </li>
                         <li>
                             <a href="{{ route('super.usuarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuario</a>
-                        </li>
-                        <li>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Editar Usuario</a>
                         </li>
                     </ul>
             <a href="#superhora" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
             <ul class="collapse" id="superhora">
                 <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Registrar/Actualizar Horario</a>
+                    <a href="{{ route('super.horarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Horario</a>
+                </li>
+                <li>
+                    <a href="{{ route('super.horarios.index') }}" class="list-group-item list-group-item-action bg-light">Actualizar Horario</a>
                 </li>
                 <li>
                     <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>

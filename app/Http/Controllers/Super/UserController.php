@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -34,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('super.usuarios.create');
+        $roles = Role::all();
+        return view('super.usuarios.create', compact('roles'));
     }
 
     /**
@@ -111,6 +113,26 @@ class UserController extends Controller
 
     }
 
+    public function user_edit($id){
+
+        //return view('super.vacas.verano', compact('invierno'));
+        $user = User::find($id);
+        return view('super.usuarios.user_edit', compact('user'));
+        //return $user;
+    }
+
+    public function editar_usuario()
+    {
+        $id = request('id');
+    DB::table('users')
+        ->where('id', $id)
+        ->update(['nombre' => request('nombre'),
+            'ci' => request('ci'),
+            'cargo' => request('cargo'),
+            'email' => request('email')]);
+
+        return redirect()->route('super.usuarios.index')->with('success', 'Datos del usuario actualizados.');
+    }
     /**
      * Display the specified resource.
      *

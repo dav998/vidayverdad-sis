@@ -29,7 +29,12 @@ Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->n
     Route::get('/upvacas', 'VacasSuperController@actualizar');
     Route::get('/invierno', 'VacasSuperController@invierno');
     Route::get('/verano', 'VacasSuperController@verano');
+    Route::resource('/horarios', 'HorarioController');
 });
+
+//Route::get('/edit/{id}', 'Super\UserController@user_edit');
+Route::post('/upuser', 'Super\UserController@editar_usuario');
+Route::get('/edit_user/{id}', [ 'as' => 'user_edit', 'uses' => 'Super\UserController@user_edit'])->middleware(['auth','auth.super']);
 
 Route::resource('permisos','PermisoController');
 Route::resource('solvacas','VacasSolController');
