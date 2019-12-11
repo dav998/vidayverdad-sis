@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/perfil', 'HomeController@perfil')->name('perfil');
 Route::get('/super', function(){
     return 'eres super';
 })->middleware(['auth','auth.super']);
@@ -25,6 +26,7 @@ Route::get('/super', function(){
 
 Route::namespace('Super')->prefix('super')->middleware(['auth','auth.super'])->name('super.')->group(function (){
     Route::resource('/usuarios', 'UserController');
+    Route::resource('/userhora', 'UserHoraController');
     Route::resource('/vacas', 'VacasSuperController');
     Route::get('/upvacas', 'VacasSuperController@actualizar');
     Route::get('/invierno', 'VacasSuperController@invierno');

@@ -14,10 +14,7 @@
                         </div>
                     @endif
 
-                        @hasrole('super')
-                        Bienvenido Super Usuario!
-                        @endhasrole
-
+                        Bienvenido!
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@
 
                         </div>
                         <table class="table">
-                            <thead class="thead-dark">
+                            <thead class="table table-hover">
                             <tr>
                                 <th scope="col"  >Tipo de Solicitud</th>
                                 <th scope="col"  >Suplente</th>

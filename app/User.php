@@ -31,6 +31,9 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany('App\Role');
     }
+    public function horarios(){
+        return $this->belongsToMany('App\Horario');
+    }
     public function permisos(){
         return $this->belongsToMany('App\Permiso');
     }
@@ -46,6 +49,13 @@ class User extends Authenticatable
     }
     public function hasAnyRole($role){
         return null !== $this->roles()->where('nombre', $role)->first();
+    }
+
+    public function hasAnyHorarios($horarios){
+        return null !== $this->horarios()->whereIn('nombre', $$horarios)->first();
+    }
+    public function hasAnyHorario($horario){
+        return null !== $this->horarios()->where('nombre', $horario)->first();
     }
 
     public function sendPasswordResetNotification($token)

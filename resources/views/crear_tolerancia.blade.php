@@ -20,6 +20,11 @@
         <input readonly value="{{$user->ci}}"  type="number" class="form-control" name="ci" id="ci" placeholder="C.I.">
     </div>
     <div class="form-group">
+        <label for="">Tipo de Solicitud</label><br>
+        <input type="radio" name="tipo" id="tipo" value="1" checked> Tolerancia
+        <input type="radio" name="tipo" id="tipo" value="2"> Salida Anticipada
+    </div>  
+    <div class="form-group">
         <label for="">Tolerancia/Salida Anticipada en Fecha: </label>
         <input readonly required value="{{date('Y-m-d')}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
     </div>
@@ -37,11 +42,7 @@
         <label for="">Suplente:</label>
         <input required value="{{old('suplente')}}"  type="text" class="form-control" name="suplente" id="suplente" placeholder="Nombre del Suplente (En caso de no existir suplente mencionarlo)">
     </div>
-    <div class="form-group">
-        <label for="">Tipo de Solicitud</label><br>
-        <input type="radio" name="tipo" id="tipo" value="1" checked> Tolerancia
-        <input type="radio" name="tipo" id="tipo" value="2"> Salida Anticipada
-    </div>
+
     <button type="submit"  class="btn btn-primary">Enviar</button>
 </form>
 </div>

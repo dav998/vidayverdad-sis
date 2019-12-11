@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\VacasUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,5 +27,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function perfil()
+    {
+
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        return view('perfil', compact('user'));
     }
 }

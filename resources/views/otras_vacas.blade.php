@@ -4,11 +4,11 @@
     <div class="text-center m-t-lg">
         @if($vacas->id == 1)
             <h1>
-                Actualizar Vacaciones Invierno
+                Vacaciones Invierno
             </h1>
         @else
             <h1>
-                Actualizar Vacaciones Fin de A&ntilde;o
+                Vacaciones Fin de A&ntilde;o
             </h1>
         @endif
     </div>

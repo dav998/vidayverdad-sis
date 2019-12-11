@@ -1,5 +1,6 @@
 <?php
 
+use App\Horario;
 use App\VacasUser;
 use Illuminate\Database\Seeder;
 use App\User;
@@ -27,6 +28,10 @@ class UsersTableSeeder extends Seeder
         $personalRole = Role::where('nombre', 'personal')->first();
         $profesorRole = Role::where('nombre', 'profesor')->first();
         $recepcionRole = Role::where('nombre', 'recepcion')->first();
+
+        $adminHora = Horario::where('nombre', 'ADM-1')->first();
+        $direccionHora = Horario::where('nombre', 'ADM-1')->first();
+        $recepcionHora = Horario::where('nombre', 'ADM-1')->first();
 
         $super = User::create([
             'nombre'=>'SuperSU',
@@ -103,12 +108,17 @@ class UsersTableSeeder extends Seeder
         $super->roles()->attach($superRole);
         $admin->roles()->attach($adminRole);
         $direccion->roles()->attach($direccionRole);
+        $recepcion->roles()->attach($recepcionRole);
+
+        $admin->horarios()->attach($adminHora);
+        $direccion->horarios()->attach($direccionHora);
+        $recepcion->horarios()->attach($recepcionHora);
         //$secretaria_dir->roles()->attach($secretaria_dirRole);
         /*$sistemas->roles()->attach($sistemasRole);
         $supervisor->roles()->attach($supervisorRole);
         $personal->roles()->attach($personalRole);
         $profesor->roles()->attach($profesorRole);*/
-        $recepcion->roles()->attach($recepcionRole);
+
 
        /* $vacas = new VacasUser();
         $dias_disp = 2;

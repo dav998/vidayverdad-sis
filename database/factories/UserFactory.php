@@ -1,5 +1,6 @@
 <?php
 
+use App\Horario;
 use App\Role;
 use App\User;
 use App\VacasUser;
@@ -32,6 +33,10 @@ $factory->define(User::class, function (Faker $faker) {
 $factory->afterCreating(User::class, function ($user, $faker){
     $roles = Role::where('nombre','profesor')->get();
     $user->roles()->sync($roles->pluck('id')->toArray());
+
+    $horarios = Horario::where('nombre','ADM-1')->get();
+    $user->horarios()->sync($horarios->pluck('id')->toArray());
+
 
     $vacas = new VacasUser();
     $dias_disp = 2;

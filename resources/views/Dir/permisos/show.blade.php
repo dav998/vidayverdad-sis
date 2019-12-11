@@ -89,7 +89,13 @@
                 width: 100%;
             }
         }
+        @media print {
+            #printbtn {
+                display :  none;
+            }
+        }
     </style>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -171,11 +177,13 @@
                             <label for="">Agrega Imagenes de Respaldo</label>
                             <input accept="image/*" type="file" class="-file-photo-o" name="imagen" id="imagen">
                         </div-->
+                        <button id="printbtn" onclick="myFunction()" class="btn-primary">Pasar a PDF</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         // Get the modal
@@ -197,6 +205,10 @@
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
+        }
+
+        function myFunction() {
+            window.print();
         }
     </script>
 @endsection

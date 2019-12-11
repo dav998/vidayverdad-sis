@@ -40,13 +40,13 @@
 </style>
 <body>
 <div class="row">
-                    <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
+                    <div class="panel-heading">Reportes/Permisos/Tolerancias</div>
                         <table class="table" id="solicitudes">
                             <thead class="thead-dark">
                             <tr style="overflow-x: auto">
                                 <th class="text-center" scope="col" >Nombre y Apellido</th>
                                 <th class="text-center" scope="col" >Cargo</th>
-                                <th class="text-center" scope="col" >Solicitudes Aprovadas</th>
+                                <th class="text-center" scope="col" >Solicitudes Aprobadas</th>
                                 <th class="text-center" scope="col" >Solicitudes Rechazadas</th>
                                 <th class="text-center" scope="col" >Solicitudes En Espera</th>
                                 <th class="text-center" scope="col" >Total Solicitudes</th>

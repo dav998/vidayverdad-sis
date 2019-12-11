@@ -18,10 +18,11 @@
 
 </head>
 
-<style type="text/css" media="print">
-    .NonPrintable
-    {
-        display: none;
+<style type="text/css">
+    @media print {
+        #printbtn {
+            display :  none;
+        }
     }
 </style>
 
@@ -38,7 +39,7 @@
             <a href="#superuser" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Usuarios</a>
                     <ul class="collapse" id="superuser">
                         <li>
-                            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Editar Usuario</a>
+                            <a href="{{ route('super.usuarios.index') }}" class="list-group-item list-group-item-action bg-light">Ver/Editar Usuario</a>
                         </li>
                         <li>
                             <a href="{{ route('super.usuarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Usuario</a>
@@ -47,13 +48,13 @@
             <a href="#superhora" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Horarios</a>
             <ul class="collapse" id="superhora">
                 <li>
+                    <a href="{{ route('super.horarios.index') }}" class="list-group-item list-group-item-action bg-light">Ver/Editar Horarios</a>
+                </li>
+                <li>
                     <a href="{{ route('super.horarios.create') }}" class="list-group-item list-group-item-action bg-light">Registrar Horario</a>
                 </li>
                 <li>
-                    <a href="{{ route('super.horarios.index') }}" class="list-group-item list-group-item-action bg-light">Actualizar Horario</a>
-                </li>
-                <li>
-                    <a href="#" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
+                    <a href="{{ route('super.userhora.index') }}" class="list-group-item list-group-item-action bg-light">Asignar Horarios</a>
                 </li>
             </ul>
             <a href="#supervacas" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Vacaciones</a>
@@ -234,7 +235,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('home')}}">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sistema profesores</a>
@@ -248,7 +249,7 @@
                             {{ Auth::user()->nombre }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Ver Perfil</a>
+                            <a class="dropdown-item" href="{{action('HomeController@perfil')}}">Ver Perfil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();

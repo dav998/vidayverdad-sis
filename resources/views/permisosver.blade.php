@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Administrar Solicitudes de Permisos/Tolerancias</div>
+                    <div class="panel-heading">Solicitudes de Permisos/Tolerancias</div>
                     <div class="panel-body">
                             <legend>Ver Solicitud de Permiso/Tolerancia</legend>
                         <div class="form-group">
@@ -111,7 +111,7 @@
                         </div>
                             <div class="form-group">
                                 <label for="">Solicitud Enviada en Fecha:</label>
-                                <input readonly  value="{{$data->created_at}}" type="text" class="form-control" name="fecha_ausente" id="fecha_ausente">
+                                <input readonly  value="{{$data->created_at}}" type="datetime" class="form-control" name="fecha_ausente" id="fecha_ausente">
                             </div>
                             <div class="form-group">
                                 <label for="">Fecha de Ausencia</label>

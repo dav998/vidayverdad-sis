@@ -34,7 +34,7 @@
     }
 </script>
 <div class="row">
-                    <div class="panel-heading">Administrar Solicitudes/Permiso/Tolerancia/Pendientes</div>
+                    <div class="panel-heading">Reportes/Vacaciones</div>
                         <table class="table" id="reportevacas">
                             <thead class="thead-dark">
                             <tr style="overflow-x: auto">
@@ -43,7 +43,7 @@
                                 <th class="text-center" scope="col" >Fecha de Ingreso</th>
                                 <th class="text-center" scope="col" >A&ntilde;os trabajados al {{Date('d/m/Y')}}</th>
                                 <th class="text-center" scope="col" >Dias de Vacacion por Antig&utilde;edad</th>
-                                <th class="text-center" scope="col" >Dias Disponibles Gestion {{now()->year}}</th>
+                                <th class="text-center" scope="col" >Dias Disponibles Gestion {{now()->year - 1}}</th>
                                 <th class="text-center" scope="col" >Dias de Vacacion Gestion {{now()->year}}</th>
                                 <th class="text-center" scope="col" >Dias Tomados Gestion {{now()->year}}</th>
                                 <th class="text-center" scope="col" >Total Dias de Vacacion</th>

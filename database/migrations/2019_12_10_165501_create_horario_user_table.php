@@ -15,7 +15,7 @@ class CreateHorarioUserTable extends Migration
     {
         Schema::create('horario_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('horarios_id')->unsigned();
+            $table->integer('horario_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
