@@ -106,7 +106,7 @@ class VacasSolController extends Controller
     public function store()
     {
         //dd($request->all());
-
+        $tipovaca = request('idvaca');
         $vacas = new SolVacas();
         $vacas->tipo = request('idvaca');
         $vacas->user_id = request('id');
@@ -116,7 +116,16 @@ class VacasSolController extends Controller
         $vacas->aprobado = 0;
         $pendientes = request('pendientes');
         if($pendientes < 0){
-            return redirect()->action('VacasSolController@create')->withInput()->with('warning', 'No puede tener dias pendientes negativos');
+            if($tipovaca == 1){
+                return redirect()->action('VacasSolController@invierno')->withInput()->with('warning', 'No puede tener dias pendientes negativos');
+            }else{
+                if($tipovaca == 2){
+                return redirect()->action('VacasSolController@verano')->withInput()->with('warning', 'No puede tener dias pendientes negativos');
+                }else{
+                    return redirect()->action('VacasSolController@create')->withInput()->with('warning', 'No puede tener dias pendientes negativos');
+                }
+            }
+
         }else{
             $vacas->save();
             $infos = DB::table('solicitud_vacas')
