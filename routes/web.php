@@ -58,6 +58,8 @@ Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('
 Route::get('Dir/permisos/aproved', 'Dir\PermisosAdmController@aproved')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/permisos/rejected', 'Dir\PermisosAdmController@rejected')->middleware(['auth', 'auth.dir']);
 Route::get('/hola', 'Dir\PermisosAdmController@reporte')->middleware(['auth', 'auth.dir']);
+Route::get('Dir/permisos/pre_permisos', 'Dir\PermisosAdmController@pre_permisos')->middleware(['auth', 'auth.dir']);
+Route::post('Dir/permisos/permisos_reporte', 'Dir\PermisosAdmController@reporte')->middleware(['auth', 'auth.dir']);
 
 Route::get('Dir/vacaciones/espera', 'Dir\VacasAdmController@espera')->middleware(['auth', 'auth.dir']);
 Route::get('Dir/vacaciones/aproved', 'Dir\VacasAdmController@aproved')->middleware(['auth', 'auth.dir']);

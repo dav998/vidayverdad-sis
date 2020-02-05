@@ -105,8 +105,9 @@
             </ul>
                 </li>
             </ul>
-
+                <a href="#"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Administrar Vacaciones</a>
             <ul class="list-group">
+
                 <li>
                     <a href="#homeSubmenurep"  data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">Reportes</a>
                     <ul class="collapse" id="homeSubmenurep">
@@ -117,7 +118,8 @@
                             <a href="{{ url('Dir/vacaciones/personal') }}" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
                         </li>
                 <li>
-                    <a href="{{action('Dir\PermisosAdmController@reporte')}}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                <a href="{{ url('Dir/permisos/pre_permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                    <!--a href="{{action('Dir\PermisosAdmController@reporte')}}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a-->
                 </li>
 
             </ul>
