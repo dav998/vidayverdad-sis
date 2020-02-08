@@ -33,8 +33,27 @@
     }
     }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<div class="panel-heading">Reportes/Vacaciones</div>
 <div class="row">
-                    <div class="panel-heading">Reportes/Vacaciones</div>
+
+    <div>
+        <form class="form-inline active-cyan-4">
+            <i class="fas fa-search" aria-hidden="true">Busca Aqu&iacute;</i>
+            <input id="myInput" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Buscar"
+                   aria-label="Search">
+
+        </form><br> </div>
                         <table class="table" id="reportevacas">
                             <thead class="thead-dark">
                             <tr style="overflow-x: auto">
@@ -50,7 +69,7 @@
 
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
                             @if($datas->isEmpty())
                                 <tr><th colspan="9" class="text-center">No hay registro de vacaciones</th></tr>
                             @else
@@ -71,6 +90,7 @@
                                 @endif
                             </tbody>
                         </table>
+    {{ $datas->links() }}
 </div>
 <button class="btn-primary" onclick="exportTableToExcels('reportevacas', 'Reporte_vacaciones')">Descargar en Excel</button>
 @endsection

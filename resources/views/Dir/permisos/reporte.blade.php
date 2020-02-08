@@ -55,9 +55,9 @@
 <div class="row">
     <div>
     <form class="form-inline active-cyan-4">
+        <i class="fas fa-search" aria-hidden="true">Busca Aqu&iacute;</i>
         <input id="myInput" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Buscar"
                aria-label="Search">
-        <i class="fas fa-search" aria-hidden="true"></i>
     </form><br> </div>
 
                         <table class="table" id="solicitudes">
