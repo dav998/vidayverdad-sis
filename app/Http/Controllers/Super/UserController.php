@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Super;
 
 use App\Asistencia;
 use App\Permiso;
+use App\ReponerVacas;
 use App\Role;
 use App\RoleUser;
 use App\SolVacas;
@@ -204,6 +205,7 @@ class UserController extends Controller
                 //$user->vacas()->detach();
                 SolVacas::where('user_id', $id)->delete();
                 Asistencia::where('user_id', $id)->delete();
+                ReponerVacas::where('user_id', $id)->delete();
                 //$user->solvacas()->delete();
                 $user->delete();
                 return redirect()->route('super.usuarios.index')->with('success', 'El Usuario ha sido eliminado.');
