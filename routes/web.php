@@ -50,6 +50,12 @@ Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.adm'])->name('
     Route::resource('/vacaciones', 'VacasAdmController');
 });
 
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'auth.adm'])->name('admin.')->group(function (){
+    Route::resource('reponer_vacas','ReponerVacasController');
+    Route::post('/reponer_restar', 'ReponerVacasController@buscar');
+    Route::post('/reponer/{id}', 'ReponerVacasController@reponer');
+});
+
 Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('dir.')->group(function (){
     Route::resource('/permisos', 'PermisosAdmController');
     Route::resource('/vacaciones', 'VacasAdmController');
