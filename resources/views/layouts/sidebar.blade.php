@@ -103,9 +103,10 @@
                     </ul>
                 </li>
             </ul>
-                </li>
-            </ul>
-            <a href="{{url('admin/reponer_vacas')}}" class="list-group-item list-group-item-action bg-light">Administrar Vacaciones</a>
+
+            <a href="{{url('admin/reponer_vacas')}}" class="list-group-item list-group-item-action bg-light">Modificar Vacaci&oacute;n</a>
+
+
             <ul class="list-group">
 
                 <li>
@@ -116,6 +117,9 @@
                 </li>
                         <li>
                             <a href="{{ url('Dir/vacaciones/personal') }}" class="list-group-item list-group-item-action bg-light">Vacaciones Personal</a>
+                        </li>
+                        <li>
+                            <a href="{{url('admin/reporte')}}" class="list-group-item list-group-item-action bg-light">Modificaci&oacute;n de Vacaci&oacute;n</a>
                         </li>
                 <li>
                 <a href="{{ url('Dir/permisos/pre_permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>

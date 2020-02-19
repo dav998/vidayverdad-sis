@@ -26,8 +26,12 @@
     </div>
     <div class="form-group">
         <label for="">D&iacute;as a Reponer/Restar</label><br>
-        *Nota: Numeros positivos repone dias, numeros negativos resta dias
+        *Nota: N&uacute;meros positivos repone d&iacute;as, n&uacute;meros negativos resta d&iacute;as
         <input required value="{{old('dias')}}"  type="number" class="form-control" name="dias" id="dias">
+    </div>
+    <div class="form-group">
+        <label for="">Motivo</label>
+        <textarea required   type="text" class="form-control" name="motivo" id="motivo" placeholder="Motivo" ></textarea>
     </div>
 
     <button type="submit"  class="btn btn-primary">Enviar</button>

@@ -51,9 +51,10 @@ Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.adm'])->name('
 });
 
 Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'auth.adm'])->name('admin.')->group(function (){
-    Route::resource('reponer_vacas','ReponerVacasController');
+    Route::resource('/reponer_vacas','ReponerVacasController');
     Route::post('/reponer_restar', 'ReponerVacasController@buscar');
     Route::post('/reponer/{id}', 'ReponerVacasController@reponer');
+    Route::get('/reporte', 'ReponerVacasController@reporte');
 });
 
 Route::namespace('Dir')->prefix('dir')->middleware(['auth', 'auth.dir'])->name('dir.')->group(function (){

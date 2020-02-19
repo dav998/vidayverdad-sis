@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ReponerVacas;
 use App\User;
 use App\VacasUser;
 use Illuminate\Http\Request;
@@ -51,9 +52,24 @@ class ReponerVacasController
 
 
     }
+
+    public function reporte(){
+
+        $datas = DB::table('reponer_vacas as P')
+            ->select('P.dias_repuestos','P.created_at', 'P.motivo', 'U.cargo','U.nombre', 'U.id','P.id as pid')
+            ->join('users as U', 'U.id', '=', 'P.user_id')
+            ->orderBy('P.created_at', 'DESC')
+            ->paginate(10);
+        return view('admin.reporte', compact('datas'));
+
+    }
     public function show($id)
     {
 
+        $data = ReponerVacas::find($id);
+        $user = User::where('id','=',$data->user_id)->get()->first();
+
+        return view('admin.show', compact('data', 'user'));
     }
     public function create(){
 
@@ -61,6 +77,7 @@ class ReponerVacasController
     public function reponer($id){
 
         $dias = request('dias');
+        $motivo = request('motivo');
         $vacas = VacasUser::where('user_id','=',$id)->get()->first();
         $dias_tomados = $vacas->dias_tomados;
         $dias_disp = $vacas->dias_disp;
@@ -79,6 +96,29 @@ class ReponerVacasController
             DB::table('solicitud_vacas')
                 ->where('user_id', $id)
                 ->update(['dias' => $re_dias_tom]);
+
+            $reponer = new ReponerVacas();
+            $reponer->user_id = $id;
+            $reponer->dias_repuestos = $dias;
+            $reponer->motivo = $motivo;
+            $reponer->save();
+
+            $infos = DB::table('reponer_vacas')
+                ->join('users', 'reponer_vacas.user_id', '=', 'users.id')
+                ->where('users.id' , '=', $id)
+                ->select('users.nombre', 'reponer_vacas.dias_repuestos', 'reponer_vacas.motivo')
+                ->get();
+
+
+            $data = array('infos' => $infos);
+            $to_name= 'Direccion';
+            $to_mail = 'daalfaro96@gmail.com';
+
+            Mail::send('emails.reponer_mail_user', $data, function ($message) use ($to_name, $to_mail){
+                $message->to($to_mail, $to_name)
+                    ->subject('Reposición/Resta de Vacación');
+                $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+            });
 
 
             return redirect()->action('Admin\ReponerVacasController@index')->with('success', 'Datos actualizados');
