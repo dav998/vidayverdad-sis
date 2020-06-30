@@ -197,13 +197,16 @@ class PermisosAdmController extends Controller
         $infos = DB::table('permisos')
             ->join('users', 'permisos.user_id', '=', 'users.id')
             ->where('permisos.id' , '=', $id)
-            ->select('users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo','permisos.aprobado', 'permisos.observaciones')
+            ->select('users.email','users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo','permisos.aprobado', 'permisos.observaciones')
             ->get();
 
 
         $data = array('infos' => $infos);
         $to_name= 'Direccion';
-        $to_mail = 'daalfaro96@gmail.com';
+        foreach ($infos as $info){
+            $to_mail = $info->email;
+        }
+
 
         Mail::send('emails.permiso_mail_user', $data, function ($message) use ($to_name, $to_mail){
             $message->to($to_mail, $to_name)

@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                             @if($datas->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay solicitudes aprobadas</th></tr>
+                                <tr><th colspan="6" class="text-center">No se registraron modificaciones</th></tr>
                             @else
                                 @foreach($datas as $data)
                                     <tr>

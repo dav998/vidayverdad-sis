@@ -217,7 +217,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ url('/permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos/Tolerancia</a>
+                        <a href="{{ url('/permisos') }}" class="list-group-item list-group-item-action bg-light">Permisos</a>
                     </li>
                 </ul>
                 </li>

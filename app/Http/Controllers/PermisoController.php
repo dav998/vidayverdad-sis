@@ -68,16 +68,37 @@ class PermisoController extends Controller
             ->select('users.nombre', 'users.cargo', 'permisos.fecha_ausencia', 'permisos.motivo', 'permisos.tipo')
             ->get();
 
+        $mailadm = DB::table('users')
+            ->select('users.email')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->where('roles.nombre', '=', 'administrador')
+            ->get()->first();
+
+        $maildir = DB::table('users')
+            ->select('users.email')
+            ->join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->where('roles.nombre', '=', 'direccion')
+            ->get()->first();
+
 
         $data = array('infos' => $infos);
         $to_name= 'Direccion';
-        $to_mail = 'daalfaro96@gmail.com';
+        $to_mailadm = $mailadm->email;
+        $to_maildir = $maildir->email;
 
-        Mail::send('emails.permiso_mail', $data, function ($message) use ($to_name, $to_mail){
-        $message->to($to_mail, $to_name)
+        Mail::send('emails.permiso_mail', $data, function ($message) use ($to_name, $to_mailadm){
+        $message->to($to_mailadm, $to_name)
             ->subject('Solicitud de Permiso');
         $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
     });
+
+        Mail::send('emails.permiso_mail', $data, function ($message) use ($to_name, $to_maildir){
+            $message->to($to_maildir, $to_name)
+                ->subject('Solicitud de Permiso');
+            $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
+        });
 
 
         /*$image = $request->file('imagen');
@@ -85,6 +106,7 @@ class PermisoController extends Controller
         $multimedia->uri = $image->getClientOriginalName();
         $multimedia->id_propiedad = $propiedad->id_propiedad;
         $multimedia->save();*/
+
        return redirect()->route('permisos.index')->with('success', 'Solicitud Enviada.');
     }
 

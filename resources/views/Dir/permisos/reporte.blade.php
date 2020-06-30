@@ -76,7 +76,7 @@
                             </thead>
                             <tbody id="myTable">
                             @if($datas->isEmpty())
-                                <tr><th colspan="5" class="text-center">No hay registro de solicitudes</th></tr>
+                                <tr><th colspan="9" class="text-center">No hay registro de solicitudes</th></tr>
                             @else
                             @foreach($datas as $data)
 

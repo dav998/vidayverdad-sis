@@ -169,6 +169,7 @@ class VacasAdmController extends Controller
 
         $diasvacas = SolVacas::where('id', $id)->get()->first();
         $diasuser = VacasUser::where('user_id', $diasvacas->user_id)->get()->first();
+        $usermail = User::where('id', $diasvacas->user_id)->get()->first();
 
         if($diasvacas->dias > $diasuser->dias_disp && request('aproved') == 1){
             return redirect()->action('Dir\VacasAdmController@edit', $id)->with('danger', 'Los dias de vacacion del empleado son menores al solicitado. Por favor rechace la solicitud.');
@@ -200,7 +201,8 @@ class VacasAdmController extends Controller
 
                 $data = array('infos' => $infos);
                 $to_name = 'Direccion';
-                $to_mail = 'daalfaro96@gmail.com';
+                //$to_mail = 'daalfaro96@gmail.com';
+                $to_mail = $usermail->email;
 
                 Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail) {
                     $message->to($to_mail, $to_name)
@@ -208,7 +210,8 @@ class VacasAdmController extends Controller
                     $message->from('ue.vida.verdad@gmail.com', 'Vida y Verdad');
                 });
 
-                return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
+               return redirect()->action('Dir\VacasAdmController@espera')->with('success', 'Solicitud de Registrada');
+
 
             } else {
 
@@ -221,7 +224,8 @@ class VacasAdmController extends Controller
 
                 $data = array('infos' => $infos);
                 $to_name = 'Direccion';
-                $to_mail = 'daalfaro96@gmail.com';
+                //$to_mail = 'daalfaro96@gmail.com';
+                $to_mail = $usermail->email;
 
                 Mail::send('emails.vacas_mail_user', $data, function ($message) use ($to_name, $to_mail) {
                     $message->to($to_mail, $to_name)

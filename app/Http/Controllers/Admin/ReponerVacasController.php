@@ -109,10 +109,10 @@ class ReponerVacasController
                 ->select('users.nombre', 'reponer_vacas.dias_repuestos', 'reponer_vacas.motivo')
                 ->get();
 
-
+            $usermail = User::where('id', $id)->get()->first();
             $data = array('infos' => $infos);
             $to_name= 'Direccion';
-            $to_mail = 'daalfaro96@gmail.com';
+            $to_mail = $usermail->email;
 
             Mail::send('emails.reponer_mail_user', $data, function ($message) use ($to_name, $to_mail){
                 $message->to($to_mail, $to_name)

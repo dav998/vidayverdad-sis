@@ -202,6 +202,7 @@ class UserController extends Controller
                 Permiso::where('user_id', $id)->delete();
                 VacasUser::where('user_id', $id)->delete();
                 //$user->permisos()->detach();
+
                 //$user->vacas()->detach();
                 SolVacas::where('user_id', $id)->delete();
                 Asistencia::where('user_id', $id)->delete();
