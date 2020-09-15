@@ -14,7 +14,7 @@
                                 <th class="text-center" scope="col" >Fecha de Modificaci&oacute;n</th>
                                 <th class="text-center" scope="col" >Nombre</th>
                                 <th class="text-center" scope="col" >Cargo</th>
-                                <th class="text-center" scope="col" >D&iacute;s Repuestos/Restados</th>
+                                <th class="text-center" scope="col" >D&iacute;as Repuestos/Restados</th>
                                 <th class="text-center" scope="col" >Motivo</th>
                                 <th class="text-center" scope="col" class="text-center">Acciones</th>
                                 <th></th>

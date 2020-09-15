@@ -38,10 +38,10 @@ class UsersTableSeeder extends Seeder
             'ci' => '0',
             'email' => 'super@super.com',
             'cargo' => 'Super Usuario',
-            'password' => bcrypt('super')
+            'password' => bcrypt('Suejrama')
         ]);
 
-        $admin = User::create([
+       /* $admin = User::create([
             'nombre'=>'admin',
             'ci' => '1111111',
             'cargo' => 'Administracion',
@@ -95,7 +95,7 @@ class UsersTableSeeder extends Seeder
             'cargo' => 'Profesor Matematicas',
             'email' => 'profe@profe.com',
             'password' => bcrypt('profesor')
-        ]);*/
+        ]);
 
         $recepcion = User::create([
             'nombre'=>'Aleida',
@@ -103,10 +103,10 @@ class UsersTableSeeder extends Seeder
             'cargo'=>'Recepcion',
             'email' => 'recep@recep.com',
             'password' => bcrypt('recep')
-        ]);
+        ]);*/
 
         $super->roles()->attach($superRole);
-        $admin->roles()->attach($adminRole);
+       /* $admin->roles()->attach($adminRole);
         $direccion->roles()->attach($direccionRole);
         $recepcion->roles()->attach($recepcionRole);
 
@@ -157,6 +157,6 @@ class UsersTableSeeder extends Seeder
         $vacas->dias_disp = $dias_disp;
         $vacas->save();*/
 
-        factory(User::class, 10)->create();
+        //factory(User::class, 10)->create();
     }
 }
